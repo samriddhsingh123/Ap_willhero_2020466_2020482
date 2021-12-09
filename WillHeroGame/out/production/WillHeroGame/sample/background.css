@@ -1,0 +1,20 @@
+.bodybg{
+    -fx-background-image: url("/sample/png2jpg/will.jpg");
+    -fx-background-size: 100% 100%;
+}
+.pasuebutton{
+    -fx-background-image: url("/sample/png2jpg/pausebutton.jpg");
+    -fx-background-size: 100% 100%;
+}
+.PauseBody{
+    -fx-background-image: url("/sample/png2jpg/backgroundForPause.jpg");
+    -fx-background-size: 100% 100%;
+}
+.Creditbg{
+    -fx-background-image: url("/sample/png2jpg/credit.jpg");
+    -fx-background-size: 100% 100%;
+}
+.main{
+-fx-background-image: url("/sample/png2jpg/sky1.jpg");
+-fx-background-size: cover;
+}
