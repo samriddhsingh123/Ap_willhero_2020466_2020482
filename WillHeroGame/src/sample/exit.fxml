@@ -6,21 +6,21 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane onDragDetected="#handleCloseButtonAction" prefHeight="400.0" prefWidth="600.0" styleClass="exitbg" stylesheets="@background.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller2">
+<AnchorPane onDragDetected="#handleCloseButtonAction" prefHeight="800.0" prefWidth="1100.0" styleClass="exitbg" stylesheets="@background.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller2">
    <children>
-      <Button fx:id="closeButton" layoutX="287.0" layoutY="555.0" mnemonicParsing="false" onAction="#handleCloseButtonAction" styleClass="yesButton" stylesheets="@background.css" textFill="#f61109" underline="true">
+      <Button fx:id="closeButton" alignment="CENTER" layoutX="495.0" layoutY="605.0" mnemonicParsing="false" onAction="#handleCloseButtonAction" prefHeight="43.0" prefWidth="31.0" styleClass="yesButton" stylesheets="@background.css" textFill="#f61109" underline="true">
          <font>
             <Font size="23.0" />
          </font>
       </Button>
-      <Button layoutX="400.0" layoutY="555.0" mnemonicParsing="false" onAction="#exitToMainMenu" styleClass="noButton" stylesheets="@background.css" textFill="#f61109" underline="true">
+      <Button alignment="CENTER" layoutX="691.0" layoutY="605.0" mnemonicParsing="false" onAction="#exitToMainMenu" styleClass="noButton" stylesheets="@background.css" textFill="#f61109" underline="true">
          <font>
             <Font size="23.0" />
          </font>
       </Button>
-      <Pane layoutX="125.0" layoutY="503.0" prefHeight="66.0" prefWidth="518.0">
+      <Pane layoutY="503.0" prefHeight="66.0" prefWidth="643.0">
          <children>
-            <Label layoutY="4.0" prefHeight="59.0" prefWidth="584.0" text="Do you really want to exit?" textFill="#ffffff" underline="true">
+            <Label alignment="CENTER" layoutX="70.0" layoutY="4.0" prefHeight="59.0" prefWidth="1031.0" text="Do you really want to exit?" textFill="#ffffff" underline="true">
                <font>
                   <Font name="Bodoni MT Black Italic" size="35.0" />
                </font>

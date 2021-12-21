@@ -22,7 +22,7 @@
                   <Font size="23.0" />
                </font>
             </Button>
-            <Button fx:id="Exit" mnemonicParsing="false" prefHeight="50.0" prefWidth="164.0" style="-fx-background-color: #6bedd7;" text="Exit" textFill="#1f05ff">
+            <Button fx:id="Exit" mnemonicParsing="false" onAction="#GoToExit" prefHeight="50.0" prefWidth="164.0" style="-fx-background-color: #6bedd7;" text="Exit" textFill="#1f05ff">
                <font>
                   <Font size="23.0" />
                </font></Button>

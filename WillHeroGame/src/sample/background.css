@@ -22,15 +22,15 @@
     -fx-background-image: url("/sample/png2jpg/exitbg.jpg");
     -fx-background-size: 100% 100%;
 }
-.backButton{
-    -fx-background-image: url("/sample/png2jpg/backButton.jpg");
-    -fx-background-size: 100% 100%;
-}
 .yesButton{
     -fx-background-image: url("/sample/png2jpg/yesButton.jpg");
     -fx-background-size: 100% 100%;
 }
 .noButton{
     -fx-background-image: url("/sample/png2jpg/noButton.jpg");
+    -fx-background-size: 100% 100%;
+}
+.backButton{
+    -fx-background-image: url("/sample/png2jpg/backButton.jpg");
     -fx-background-size: 100% 100%;
 }
