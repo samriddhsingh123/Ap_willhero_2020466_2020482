@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import javax.swing.text.html.ImageView;
 
@@ -43,6 +44,7 @@ public class Main extends Application {
             Scene scene = new Scene(r,1100,800);
 //            scene.getStylesheets().add(String.valueOf(getClass().getResource("application.css")));
             Image im = new Image("/sample/png2jpg/gameIcon.jpg");
+            stage.initStyle(StageStyle.TRANSPARENT);
             stage.getIcons().add(im);
             stage.setTitle("Will Hero");
             stage.setScene(scene);

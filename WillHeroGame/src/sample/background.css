@@ -1,5 +1,9 @@
 .bodybg{
-    -fx-background-image: url("/sample/png2jpg/will.jpg");
+    -fx-background-image: url("/sample/png2jpg/willherobg.jpg");
+    -fx-background-size: 100% 100%;
+}
+.revive{
+    -fx-background-image: url("/sample/png2jpg/img_2.jpg");
     -fx-background-size: 100% 100%;
 }
 .pasuebutton{
@@ -11,26 +15,51 @@
     -fx-background-size: 100% 100%;
 }
 .Creditbg{
-    -fx-background-image: url("/sample/png2jpg/credit.jpg");
+    -fx-background-image: url("/sample/png2jpg/creditq.jpg");
     -fx-background-size: 100% 100%;
 }
 .main{
--fx-background-image: url("/sample/png2jpg/sky1.jpg");
+    -fx-background-image: url("/sample/png2jpg/sky1.jpg");
     -fx-background-size: 100% 100%;
 }
 .exitbg{
-    -fx-background-image: url("/sample/png2jpg/exitbg.jpg");
-    -fx-background-size: 100% 100%;
+
 }
 .yesButton{
-    -fx-background-image: url("/sample/png2jpg/yesButton.jpg");
-    -fx-background-size: 100% 100%;
+
 }
 .noButton{
-    -fx-background-image: url("/sample/png2jpg/noButton.jpg");
-    -fx-background-size: 100% 100%;
+
 }
 .backButton{
     -fx-background-image: url("/sample/png2jpg/backButton.jpg");
     -fx-background-size: 100% 100%;
 }
+.start:hover{
+    -fx-border-color: GREEN;
+    -fx-border-width: 3px 3px 3px 3px;
+    }
+.Exit:hover{
+    -fx-border-color: GREEN;
+    -fx-border-width: 3px 3px 3px 3px;
+        }
+.credit:hover{
+    -fx-border-width: 3px 3px 3px 3px;
+    -fx-border-color: GREEN;
+ }
+.Resume:hover{
+    -fx-border-width: 3px 3px 3px 3px;
+    -fx-border-color: GREEN;
+ }
+.closebutton:hover{
+     -fx-border-color: RED;
+     -fx-border-width: 3px 3px 3px 3px;
+         }
+.no:hover{
+     -fx-border-color: GREEN;
+     -fx-border-width: 3px 3px 3px 3px;
+         }
+.resu:hover{
+     -fx-border-color: BLUE;
+     -fx-border-width: 3px 3px 3px 3px;
+         }

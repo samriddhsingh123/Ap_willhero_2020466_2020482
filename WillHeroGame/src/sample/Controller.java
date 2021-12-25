@@ -2218,6 +2218,11 @@ public class Controller implements Initializable {
             if ((int) herobottom > (int) ptop + 7) {
                 if (heroright >= pleft) {
                     //game over
+//                    System.out.println(dead);
+//                    Controller2 cd=new Controller2();
+//                    try{
+//                    cd.ReviveUsingCoins(null);}
+//                    catch(IOException e){}
                 }
             }
             if(platform.getId().equals("a1")||platform.getId().equals("a2")||platform.getId().equals("a3")||platform.getId().equals("a4")||platform.getId().equals("a5")||platform.getId().equals("a6")||platform.getId().equals("a7")||platform.getId().equals("a8")||platform.getId().equals("a9")||platform.getId().equals("a10")||platform.getId().equals("a11")||platform.getId().equals("a12")){

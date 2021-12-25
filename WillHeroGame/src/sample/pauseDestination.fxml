@@ -2,23 +2,72 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller2">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="bodybg" stylesheets="@background.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller2">
    <children>
-      <AnchorPane fx:id="resume" prefHeight="800.0" prefWidth="1100.0" style="-fx-background-color: #0ba5e1;" styleClass="PauseBody" stylesheets="@background.css">
+      <AnchorPane fx:id="resume" prefHeight="800.0" prefWidth="1100.0" styleClass="Creditbg" stylesheets="@background.css">
          <children>
-            <Button fx:id="resu" layoutX="479.0" layoutY="225.0" mnemonicParsing="false" onAction="#resumeCurrent" prefHeight="69.0" prefWidth="183.0" style="-fx-background-color: #0be433;" text="Resume" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Button>
-            <Button fx:id="saveprog" layoutX="479.0" layoutY="322.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="186.0" style="-fx-background-color: #0be433;" text="Save Progress" textFill="#fdfbfb" />
-            <Button fx:id="mainmenu" layoutX="479.0" layoutY="427.0" mnemonicParsing="false" onAction="#exitToMainMenu" prefHeight="71.0" prefWidth="186.0" style="-fx-background-color: #0be433;" text="Exit To Main Menu" textFill="#fdfbfb">
-               <font>
-                  <Font name="Arial Bold" size="12.0" />
-               </font>
-            </Button>
+            <Pane blendMode="DARKEN" layoutX="325.0" layoutY="219.0" prefHeight="433.0" prefWidth="507.0" style="-fx-background-color: #00eff3;">
+               <children>
+                  <VBox layoutX="183.0" layoutY="99.0" prefHeight="282.0" prefWidth="141.0" spacing="20.0">
+                     <children>
+                        <Button fx:id="resu" mnemonicParsing="false" onAction="#resumeCurrent" prefHeight="67.0" prefWidth="193.0" style="-fx-background-color: #0be433;" styleClass="resu" stylesheets="@background.css" text="RESUME" textOverrun="CENTER_ELLIPSIS">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                           <textFill>
+                              <RadialGradient centerX="0.6370370229085286" centerY="0.5476190476190476" radius="1.0">
+                                 <stops>
+                                    <Stop color="#f40000" />
+                                    <Stop color="#f40000" offset="0.007662835249042145" />
+                                    <Stop color="#0d66a1" offset="0.31137180550618143" />
+                                    <Stop color="BLACK" offset="0.8825031928480204" />
+                                    <Stop color="BLACK" offset="1.0" />
+                                 </stops>
+                              </RadialGradient>
+                           </textFill>
+                        </Button>
+                        <Button fx:id="saveprog" mnemonicParsing="false" prefHeight="70.0" prefWidth="193.0" style="-fx-background-color: #0be433;" styleClass="resu" stylesheets="@background.css" text="SAVE PROGRESS">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                           <textFill>
+                              <RadialGradient centerX="0.6370370229085286" centerY="0.5476190476190476" radius="1.0">
+                                 <stops>
+                                    <Stop color="#f40000" />
+                                    <Stop color="#f40000" offset="0.007662835249042145" />
+                                    <Stop color="#0d66a1" offset="0.31137180550618143" />
+                                    <Stop color="BLACK" offset="0.8825031928480204" />
+                                    <Stop color="BLACK" offset="1.0" />
+                                 </stops>
+                              </RadialGradient>
+                           </textFill>
+                        </Button>
+                        <Button fx:id="mainmenu" mnemonicParsing="false" onAction="#exitToMainMenu" prefHeight="70.0" prefWidth="193.0" style="-fx-background-color: #0be433;" styleClass="resu" stylesheets="@background.css" text="EXIT TO MAIN MENU">
+                           <font>
+                              <Font name="Arial Bold" size="12.0" />
+                           </font>
+                           <textFill>
+                              <RadialGradient centerX="0.6370370229085286" centerY="0.5476190476190476" radius="1.0">
+                                 <stops>
+                                    <Stop color="#f40000" />
+                                    <Stop color="#f40000" offset="0.007662835249042145" />
+                                    <Stop color="#0d66a1" offset="0.31137180550618143" />
+                                    <Stop color="BLACK" offset="0.8825031928480204" />
+                                    <Stop color="BLACK" offset="1.0" />
+                                 </stops>
+                              </RadialGradient>
+                           </textFill>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children>
+            </Pane>
          </children>
       </AnchorPane>
    </children>
