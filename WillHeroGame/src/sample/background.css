@@ -16,7 +16,7 @@
 }
 .main{
 -fx-background-image: url("/sample/png2jpg/sky1.jpg");
--fx-background-size: cover;
+    -fx-background-size: 100% 100%;
 }
 .exitbg{
     -fx-background-image: url("/sample/png2jpg/exitbg.jpg");
