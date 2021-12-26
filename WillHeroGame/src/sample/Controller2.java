@@ -59,26 +59,21 @@ public class Controller2 {
         stage.show();
     }
     public void resumeCurrent(ActionEvent event) throws IOException {
-        FXMLLoader ld=new FXMLLoader(getClass().getResource("sample.fxml"));
-        root=ld.load();
-        Controller cont=ld.getController();
+//        FXMLLoader ld=new FXMLLoader(getClass().getResource("sample.fxml"));
+//        root=ld.load();
+        Controller cont=new Controller();
         cont.switchToGame(event);
     }
 
     public void OpenCredit(ActionEvent event) throws IOException {
-//        Parent root = FXMLLoader.load(getClass().getResource("/sample/CreditScene.fxml"));
-//        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-//        stage.setTitle("Will Hero");
-//        scene = new Scene(root,1100,800);
-////        stage.initStyle(StageStyle.TRANSPARENT);
-//        stage.setScene(scene);
-//        stage.show();
-        Parent root = FXMLLoader.load(getClass().getResource("/sample/reviveScene.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/sample/CreditScene.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setTitle("Will Hero");
         scene = new Scene(root,1100,800);
+//        stage.initStyle(StageStyle.TRANSPARENT);
         stage.setScene(scene);
         stage.show();
+
     }
     public void GoToExit(ActionEvent event) throws IOException {
         BoxBlur blur=new BoxBlur(3,3,3);
@@ -138,14 +133,7 @@ public class Controller2 {
             curStage.setScene(newScene);
 
     }
-    public void ReviveUsingCoins(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/sample/reviveScene.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        stage.setTitle("Will Hero");
-        scene = new Scene(root,1100,800);
-        stage.setScene(scene);
-        stage.show();
-    }
+
     public void OpenSavedGame(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/sample/SavedGameWindow.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
