@@ -404,6 +404,7 @@ public class Controller implements Initializable {
     @FXML
     private ImageView coin6;
 
+    private int scenecheck=0;
     private Game g;
     private Hero h;
     private int herodead=0;
@@ -432,6 +433,14 @@ public class Controller implements Initializable {
         int num=Integer.parseInt(stepcounter.getText());
         stepcounter.setText(Integer.toString(num+1));
     }
+    public void checkorcalive(ImageView orc){
+        if(orc.getBoundsInParent().getCenterY()>800){
+            if(orc.getOpacity()==1) {
+                orc.setOpacity(0);
+                changecoincounter(2);
+            }
+        }
+    }
     AnimationTimer herowithorc=new AnimationTimer() {
         @Override
         public void handle(long l) {
@@ -456,6 +465,27 @@ public class Controller implements Initializable {
             checkCollisionorcwithHero(orc20);
             checkCollisionorcwithHero(orc21);
             checkCollisionorcwithHero(orc22);
+            checkorcalive(orc1);
+            checkorcalive(orc2);
+            checkorcalive(orc3);
+            checkorcalive(orc4);
+            checkorcalive(orc5);
+            checkorcalive(orc6);
+            checkorcalive(orc7);
+            checkorcalive(orc8);
+            checkorcalive(orc9);
+            checkorcalive(orc11);
+            checkorcalive(orc12);
+            checkorcalive(orc13);
+            checkorcalive(orc14);
+            checkorcalive(orc15);
+            checkorcalive(orc16);
+            checkorcalive(orc17);
+            checkorcalive(orc18);
+            checkorcalive(orc19);
+            checkorcalive(orc20);
+            checkorcalive(orc21);
+            checkorcalive(orc22);
 
         }
     };
@@ -478,6 +508,7 @@ public class Controller implements Initializable {
     };
     public void checkcollisioherowithchest(ImageView chest){
         if(chest.getBoundsInParent().intersects(hero.getBoundsInParent())){
+
             if(chest.getId().equals("chest2")){
                 axe.setOpacity(1);
                 axefound=1;
@@ -500,7 +531,10 @@ public class Controller implements Initializable {
     public void orccollisionwithknife(ImageView knife,ImageView orc){
         if(knife.getBoundsInParent().intersects(orc.getBoundsInParent())){
             if(knife.getOpacity()==1) {
-                orc.setOpacity(0);
+                if(orc.getOpacity()==1) {
+                    orc.setOpacity(0);
+                    changecoincounter(1);
+                }
 //            orc.setTranslateX(1000);
 //            orc.setTranslateY(1000);
             }
@@ -2014,30 +2048,41 @@ public class Controller implements Initializable {
     };
     public void checkcoincollision(){
        if(hero.getBoundsInParent().intersects(coin1.getBoundsInParent())){
-           coin1.setOpacity(0);
-           changecoincounter(1);
+           if(coin1.getOpacity()==1) {
+               coin1.setOpacity(0);
+               changecoincounter(1);
+           }
 
        }
         if(hero.getBoundsInParent().intersects(coin2.getBoundsInParent())){
-            coin2.setOpacity(0);
-            changecoincounter(1);
+            if(coin2.getOpacity()==1) {
+                coin2.setOpacity(0);
+                changecoincounter(1);
+            }
 
         }if(hero.getBoundsInParent().intersects(coin3.getBoundsInParent())){
-            coin3.setOpacity(0);
-            changecoincounter(1);
+            if(coin3.getOpacity()==1) {
+                coin3.setOpacity(0);
+                changecoincounter(1);
+            }
 
         }if(hero.getBoundsInParent().intersects(coin4.getBoundsInParent())){
-            coin4.setOpacity(0);
-            changecoincounter(1);
+            if(coin4.getOpacity()==1) {
+                coin4.setOpacity(0);
+                changecoincounter(1);
+            }
 
         }if(hero.getBoundsInParent().intersects(coin5.getBoundsInParent())){
-            coin5.setOpacity(0);
-            changecoincounter(1);
+            if(coin5.getOpacity()==1) {
+                coin5.setOpacity(0);
+                changecoincounter(1);
+            }
 
         }if(hero.getBoundsInParent().intersects(coin6.getBoundsInParent())){
-            coin6.setOpacity(0);
-            changecoincounter(1);
-
+            if(coin6.getOpacity()==1) {
+                coin6.setOpacity(0);
+                changecoincounter(1);
+            }
         }
     }
     public void checkherodead(){
@@ -2051,8 +2096,10 @@ public class Controller implements Initializable {
     public void axecollissionwithorc(ImageView orc){
         if(axe.getBoundsInParent().intersects(orc.getBoundsInParent())){
             if(axe.getOpacity()==1) {
-                orc.setOpacity(0);
-                changecoincounter(1);
+                if(orc.getOpacity()==1) {
+                    orc.setOpacity(0);
+                    changecoincounter(1);
+                }
 //                orc.setTranslateX(1000);
 //                orc.setTranslateY(1000);
             }
@@ -2133,7 +2180,10 @@ public class Controller implements Initializable {
 
                     if (herotop < orcdown) {
                         if (orcdown < herotop + 10) {
-                            revivebutton.fire();
+                            if(scenecheck==0) {
+                                scenecheck=1;
+                                revivebutton.fire();
+                            }
                         }
                     }
 
