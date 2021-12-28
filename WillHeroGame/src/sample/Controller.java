@@ -404,6 +404,8 @@ public class Controller implements Initializable {
     @FXML
     private ImageView coin6;
 
+    private Game g;
+    private Hero h;
     private int herodead=0;
     private int upgraded;
     private int axefound;
@@ -419,7 +421,9 @@ public class Controller implements Initializable {
 //        stage.setScene(scene);
 //        stage.show();
 //    }
-
+    public ImageView getheroimg(){
+        return hero;
+    }
     public void changecoincounter(int i){
         int num=Integer.parseInt(coincounter.getText());
         coincounter.setText(Integer.toString(num+i));
@@ -2071,6 +2075,7 @@ public class Controller implements Initializable {
         scene.setCamera(camera);
         stage.setScene(scene);
         plist.add(platform1);
+        h=new Hero(hero);
         scene.setOnKeyPressed(new EventHandler<javafx.scene.input.KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
@@ -2699,7 +2704,7 @@ public class Controller implements Initializable {
         knife1.setOpacity(0);
         knife2.setOpacity(0);
         knife3.setOpacity(0);
-
+        g=new Game();
     }
     public void orcjump(ImageView orc){
         TranslateTransition trans1=new TranslateTransition();
@@ -2722,6 +2727,7 @@ public class Controller implements Initializable {
             mc.setDuration(Duration.millis(300));
             mc.setByX(300);
             mc.play();
+
             TranslateTransition cc=new TranslateTransition();
             cc.setNode(coincounter);
             cc.setDuration(Duration.millis(300));
@@ -2738,6 +2744,7 @@ public class Controller implements Initializable {
             trans.setDuration(Duration.millis(300));
             trans.setByX(300);
             trans.play();
+           // h.moveright();
             RotateTransition rax=new RotateTransition();
             rax.setNode(axe);
             rax.setDuration(Duration.millis(300));

@@ -1,11 +1,16 @@
 package sample;
 
+import javafx.application.Application;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.stage.Stage;
+
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Game implements Serializable {
+public class Game extends Application implements Serializable {
     private Hero WillHero;
     private Boss boss;
     private ArrayList<Island> island_list;
@@ -20,6 +25,15 @@ public class Game implements Serializable {
     private static ArrayList<Game> prevGameList;
     private static long serialVersionUID;
 
+    @Override
+    public void start(Stage stage){
+        FXMLLoader ld=new FXMLLoader(Main.class.getResource("sample.fxml"));
+        Controller cd=ld.getController();
+        WillHero =new Hero(cd.getheroimg());
+    }
+    public Hero getWillHero(){
+        return WillHero;
+    }
     public void play(int i){}
     public void getInput(){}
     public void pause(){}
