@@ -40,6 +40,8 @@ public class Main extends Application {
 //        primaryStage.show();
 //    }
         try {
+            Hero t=new Hero();
+            t.serialise();
             Parent r = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
             Scene scene = new Scene(r,1100,800);
 //            scene.getStylesheets().add(String.valueOf(getClass().getResource("application.css")));

@@ -7,13 +7,19 @@ import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
+import java.io.*;
+
 
 public class Hero extends Mortals{
     private Coin coin;
     private Weapon w;
     private ImageView hero;
-    Hero(ImageView img){
-       hero=img;
+    Hero(){
+        Position p=new Position();
+        p.setX_position(0);
+        p.setY_position(-100);
+        setPosition(p);
+
     }
 
     public void moveright(){
@@ -40,6 +46,33 @@ public class Hero extends Mortals{
     }
     @Override
     public void die() {
+
+    }
+    public void serialise() throws IOException {
+        FileOutputStream fout=new FileOutputStream("resume.txt");
+        ObjectOutputStream Out=new ObjectOutputStream(fout);
+        Out.writeObject(this);
+        Out.close();
+        fout.close();
+    }
+    public Hero derialise() throws IOException,ClassNotFoundException, FileNotFoundException {
+        Hero r;
+        try {
+
+            FileInputStream fileInputStream = new FileInputStream("resume.txt");
+            ObjectInputStream in = new ObjectInputStream(fileInputStream);
+            r = (Hero) in.readObject();
+
+            in.close();
+            fileInputStream.close();
+        }
+        catch (FileNotFoundException e){
+            return new Hero();
+        }
+        catch(NullPointerException e){
+            return new Hero();
+        }
+       return r;
 
     }
     public void MoveAhead(){

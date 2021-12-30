@@ -50,6 +50,8 @@ public class Controller2 {
     }
 
     public void exitToMainMenu(ActionEvent event) throws IOException {
+        Hero r=new Hero();
+        r.serialise();
         Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root,1100,800);

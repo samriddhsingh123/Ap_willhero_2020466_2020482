@@ -8,6 +8,9 @@ public abstract class Mortals implements Serializable {
     private Dimension dim;
     private static long serialVersionUID;
 
+    Mortals(){
+
+    }
     public Health getHealth(){
         return health;
     }
@@ -34,4 +37,5 @@ public abstract class Mortals implements Serializable {
     public abstract void jump();
     public abstract void kill(Mortals m);
     public abstract void die();
+
 }

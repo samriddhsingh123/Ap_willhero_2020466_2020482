@@ -8,7 +8,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="bodybg" stylesheets="@background.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller2">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="bodybg" stylesheets="@background.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller2">
    <children>
       <AnchorPane fx:id="resume" prefHeight="800.0" prefWidth="1100.0" styleClass="Creditbg" stylesheets="@background.css">
          <children>
@@ -16,7 +16,7 @@
                <children>
                   <VBox layoutX="183.0" layoutY="99.0" prefHeight="282.0" prefWidth="141.0" spacing="20.0">
                      <children>
-                        <Button fx:id="resu" mnemonicParsing="false" onAction="#resumeCurrent" prefHeight="67.0" prefWidth="193.0" style="-fx-background-color: #0be433;" styleClass="resu" stylesheets="@background.css" text="RESUME" textOverrun="CENTER_ELLIPSIS">
+                        <Button fx:id="resu" mnemonicParsing="false" onAction="#switchToScene1" prefHeight="67.0" prefWidth="193.0" style="-fx-background-color: #0be433;" styleClass="resu" stylesheets="@background.css" text="RESUME" textOverrun="CENTER_ELLIPSIS">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>

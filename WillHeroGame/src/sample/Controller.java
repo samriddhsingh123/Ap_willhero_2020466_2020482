@@ -87,6 +87,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
 import javafx.scene.*;
 import javafx.scene.control.Button;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
@@ -316,6 +317,8 @@ public class Controller implements Initializable {
     @FXML
     private Button pauseButton;
     @FXML
+    private ImageView boss;
+    @FXML
     private ImageView orc1;
     @FXML
     private ImageView orc2;
@@ -363,20 +366,25 @@ public class Controller implements Initializable {
     private ImageView sampleorc;
     @FXML
     private ImageView chest1;//coin
+    private int check1=0;
     @FXML
     private ImageView chest2;//axe
     @FXML
     private ImageView chest3;//coin
+    private int check3=0;
     @FXML
     private ImageView chest4;//axeupgrade
     @FXML
     private ImageView chest5;//coin
+    private int check5=0;
     @FXML
     private ImageView chest6;//coin
+    private int check6=0;
     @FXML
     private ImageView chest7;//knife
     @FXML
     private ImageView chest8;//coin
+    private int check8;
     @FXML
     private ImageView knife1;
     @FXML
@@ -403,8 +411,24 @@ public class Controller implements Initializable {
     private ImageView coin5;
     @FXML
     private ImageView coin6;
+    @FXML
+    private DialogPane revivepane2;
+    @FXML
+    private Label saveme;
+    @FXML
+    private ImageView reviveorc;
+    @FXML
+    private Button revivenobutton;
+    @FXML
+    private Button reviveyesbutton;
+    @FXML
+    private ImageView movecoin1;
 
-    private int scenecheck=0;
+    private int cameracheck=0;
+    private Hero will;
+    private int bossisdead=0;
+    private int bosslife=1000;
+    //private int scenecheck=0;
     private Game g;
     private Hero h;
     private int herodead=0;
@@ -414,7 +438,7 @@ public class Controller implements Initializable {
     private Stage stage;
     private Scene scene;
     private Parent root;
-    Camera camera = new PerspectiveCamera();
+    private Camera camera=new PerspectiveCamera();
     //    public void switchToScene1(ActionEvent event) throws IOException {
 //        root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
 //        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -433,6 +457,10 @@ public class Controller implements Initializable {
         int num=Integer.parseInt(stepcounter.getText());
         stepcounter.setText(Integer.toString(num+1));
     }
+    public void setstepcounter(int i){
+        int num=Integer.parseInt(stepcounter.getText());
+        stepcounter.setText(Integer.toString(i));
+    }
     public void checkorcalive(ImageView orc){
         if(orc.getBoundsInParent().getCenterY()>800){
             if(orc.getOpacity()==1) {
@@ -441,9 +469,199 @@ public class Controller implements Initializable {
             }
         }
     }
+    public void checkcollisionbosswithweapon(ImageView weapon){
+        if(weapon.getOpacity()!=0){
+            if(boss.getBoundsInParent().intersects(weapon.getBoundsInParent())){
+                bosslife-=1;
+            }
+        }
+    }
+    public void checkbossalive(){
+        if(bosslife==0){
+            if(bossisdead==0){
+                bossisdead=1;
+                changecoincounter(5);
+                boss.setOpacity(0);
+            }
+        }
+    }
+    public void checkbosscollision(){
+        if(boss.getOpacity()!=0) {
+            if (hero.getBoundsInParent().intersects(boss.getBoundsInParent())) {
+                double herotop = hero.getBoundsInParent().getMinY();
+                double herocentrex = hero.getBoundsInParent().getCenterX();
+                double herobottom = hero.getBoundsInParent().getMaxY();
+                double heroright = hero.getBoundsInParent().getMaxX();
+                double heroleft = hero.getBoundsInParent().getMinX();
+                double bossleft = boss.getBoundsInParent().getMinX();
+                double bossright = boss.getBoundsInParent().getMaxX();
+                double bossdown = boss.getBoundsInParent().getMaxY();
+                double bosstop = boss.getBoundsInParent().getMinY();
+                if (boss.getOpacity() != 0) {
+                    if (hero.getBoundsInParent().intersects(boss.getBoundsInParent())) {
+                        if (heroright > bossleft) {
+
+                            if (herotop < bossdown) {
+                                if (bossdown < herotop + 10) {
+                                    if (herodead == 0) {
+                                     //   revivebutton.fire();
+
+                                        herodead=1;
+                                        showrevivescene();
+
+                                    }
+                                }
+                            }
+
+                            if (bossleft + 20 >= heroright) {
+                                TranslateTransition trans = new TranslateTransition();
+                                trans.setNode(boss);
+                                trans.setDuration(Duration.millis(100));
+                                trans.setByX(100);
+                                trans.setOnFinished(e -> finished1(boss));
+                                trans.play();
+                                TranslateTransition trans2 = new TranslateTransition();
+                                trans2.setNode(camera);
+                                trans2.setByX(-10);
+
+                                TranslateTransition trans1 = new TranslateTransition();
+                                trans1.setNode(hero);
+                                trans1.setByX(-10);
+                                trans1.play();
+                                trans2.play();
+                                TranslateTransition ax = new TranslateTransition();
+                                ax.setNode(axe);
+                                ax.setByX(-10);
+                                ax.play();
+                                trans.play();
+                                TranslateTransition k1 = new TranslateTransition();
+                                k1.setNode(knife1);
+                                k1.setByX(-10);
+                                k1.play();
+                                TranslateTransition k2 = new TranslateTransition();
+                                k2.setNode(knife2);
+                                k2.setByX(-10);
+                                k2.play();
+                                TranslateTransition k3 = new TranslateTransition();
+                                k3.setNode(knife3);
+                                k3.setByY(-10);
+                                k3.play();
+                            }
+
+                        }
+                        if (herobottom >= bosstop) {
+                            if (bosstop + 20 >= herobottom) {
+                                TranslateTransition k1 = new TranslateTransition();
+                                k1.setNode(knife1);
+                                k1.setDuration(Duration.millis(100));
+                                k1.setByY(-100);
+                                k1.play();
+                                TranslateTransition k2 = new TranslateTransition();
+                                k2.setNode(knife2);
+                                k2.setDuration(Duration.millis(100));
+                                k2.setByY(-100);
+                                k2.play();
+                                TranslateTransition k3 = new TranslateTransition();
+                                k3.setNode(knife3);
+                                k3.setDuration(Duration.millis(100));
+                                k3.setByY(-100);
+                                k3.play();
+                                TranslateTransition trans = new TranslateTransition();
+                                trans.setNode(hero);
+                                trans.setDuration(Duration.millis(100));
+                                trans.setByY(-100);
+                                trans.setOnFinished(e -> finished());
+                                TranslateTransition ax = new TranslateTransition();
+                                ax.setNode(axe);
+                                ax.setDuration(Duration.millis(100));
+                                ax.setByY(-100);
+                                ax.play();
+                                trans.play();
+
+                                //axe.setTranslateY(hero.getBoundsInParent().getCenterY());
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    public void checkbosscollisionwithplatform(ImageView platform){
+        double bossleft=boss.getBoundsInParent().getMinX();
+        double bossright=boss.getBoundsInParent().getMaxX();
+        double bossdown=boss.getBoundsInParent().getMaxY();
+        double bosstop=boss.getBoundsInParent().getMinY();
+        double ptop=platform.getBoundsInParent().getMinY();
+        double pbottom=platform.getBoundsInParent().getMaxY();
+        double pright=platform.getBoundsInParent().getMaxX();
+        double pleft=platform.getBoundsInParent().getMinX();
+
+        if(boss.getBoundsInParent().intersects(platform.getBoundsInParent())) {
+
+            if (bossdown >= ptop) {
+                if(ptop+60>=bossdown) {
+                    TranslateTransition trans = new TranslateTransition();
+                    Node image = boss;
+                    trans.setNode(image);
+                    trans.setDuration(Duration.millis(300));
+                    //trans.setCycleCount(2);
+                    trans.setByY(-150);
+                    //trans.setAutoReverse(true);
+                    trans.setOnFinished(e -> finished1(boss));
+                    trans.play();
+                }
+                if(bossdown>ptop+60){
+                    if(bossright>=pleft){
+                        TranslateTransition trans = new TranslateTransition();
+                        Node image = boss;
+                        trans.setNode(image);
+                        trans.setDuration(Duration.millis(500));
+                        //trans.setCycleCount(2);
+                        trans.setByX(-50);
+                        //trans.setAutoReverse(true);
+                        trans.setOnFinished(e -> finished1(boss));
+                        trans.play();
+
+                    }
+                }
+
+
+            }
+
+
+        }}
+
     AnimationTimer herowithorc=new AnimationTimer() {
         @Override
         public void handle(long l) {
+            checkbossalive();
+            checkcollisionbosswithweapon(knife1);
+            checkcollisionbosswithweapon(knife2);
+            checkcollisionbosswithweapon(knife3);
+            checkcollisionbosswithweapon(axe);
+
+            checkbosscollisionwithplatform(d1);
+            checkbosscollisionwithplatform(d2);
+            checkbosscollisionwithplatform(d3);
+            checkbosscollisionwithplatform(d4);
+            checkbosscollisionwithplatform(d5);
+            checkbosscollisionwithplatform(d6);
+            checkbosscollisionwithplatform(d7);
+            checkbosscollisionwithplatform(d8);
+            checkbosscollisionwithplatform(d9);
+            checkbosscollisionwithplatform(d10);
+            checkbosscollisionwithplatform(d11);
+            checkbosscollisionwithplatform(d12);
+            checkbosscollisionwithplatform(platform49);
+            checkbosscollisionwithplatform(platform50);
+            checkbosscollisionwithplatform(platform51);
+            checkbosscollisionwithplatform(platform52);
+            checkbosscollisionwithplatform(platform53);
+
+
+
+
+
             checkCollisionorcwithHero(orc1);
             checkCollisionorcwithHero(orc2);
             checkCollisionorcwithHero(orc3);
@@ -492,6 +710,8 @@ public class Controller implements Initializable {
     AnimationTimer herowithchest=new AnimationTimer() {
         @Override
         public void handle(long l) {
+            checkbossalive();
+            checkbosscollision();
             checkherodead();
             checkcoincollision();
             checkcollisioherowithchest(chest1);
@@ -508,10 +728,21 @@ public class Controller implements Initializable {
     };
     public void checkcollisioherowithchest(ImageView chest){
         if(chest.getBoundsInParent().intersects(hero.getBoundsInParent())){
-
+            if(chest.getId().equals("chest1")){
+                if(check1==0){
+                    check1=1;
+                    changecoincounter(3);
+                }
+            }
             if(chest.getId().equals("chest2")){
                 axe.setOpacity(1);
                 axefound=1;
+            }
+            if(chest.getId().equals("chest3")){
+                if(check3==0){
+                    check3=1;
+                    changecoincounter(3);
+                }
             }
             if(chest.getId().equals("chest4")){
                 if(upgraded==0) {
@@ -520,11 +751,29 @@ public class Controller implements Initializable {
                     axe.setFitWidth(axe.getFitHeight() + 7.5);
                 }
             }
+            if(chest.getId().equals("chest5")){
+                if(check5==0){
+                    check5=1;
+                    changecoincounter(3);
+                }
+            }
+            if(chest.getId().equals("chest6")){
+                if(check6==0){
+                    check6=1;
+                    changecoincounter(3);
+                }
+            }
             if(chest.getId().equals("chest7")){
                 axe.setOpacity(0);
                 knife1.setOpacity(1);
                 knife2.setOpacity(1);
                 knife3.setOpacity(1);
+            }
+            if(chest.getId().equals("chest8")){
+                if(check8==0){
+                    check8=1;
+                    changecoincounter(3);
+                }
             }
         }
     }
@@ -1941,7 +2190,6 @@ public class Controller implements Initializable {
     AnimationTimer collisionfps =new AnimationTimer() {
         @Override
         public void handle(long l) {
-
             checkCollision(platform1);
             checkCollision(platform2);
             checkCollision(platform3);
@@ -2085,11 +2333,125 @@ public class Controller implements Initializable {
             }
         }
     }
+    public void setyesrevive(ActionEvent actionEvent) {
+
+        if (Integer.parseInt(coincounter.getText()) >= 10) {
+            //setcoincounter=-10;
+            Controller2 cd = new Controller2();
+            try {
+                cd.switchToScene1(actionEvent);
+            } catch (Exception e) {
+
+            }
+        }
+    }
+
+//            herodead=0;
+
+//            changecoincounter(-10);
+//           // hero.setTranslateX(will.getPosition().getX_position());
+//           // camera.setTranslateX(will.getPosition().getX_position());
+//            hero.setOpacity(1);
+//            hero.setTranslateY(-300);
+//            movecoin1.setOpacity(0);
+//            reviveorc.setOpacity(0);
+//            revivenobutton.setOpacity(0);
+//            reviveyesbutton.setOpacity(0);
+//            revivepane2.setOpacity(0);
+//            finished();
+//            hero.setOnKeyPressed(new EventHandler<javafx.scene.input.KeyEvent>() {
+//                @Override
+//                public void handle(KeyEvent keyEvent) {
+//                    if(keyEvent.getText().equals("d")) {
+////            moverevive(movecoin1);
+////            moverevive(reviveorc);
+////            moverevive(reviveyesbutton);
+////            moverevive(revivenobutton);
+//                        moverevive(revivepane2);
+//                        // moverevive(saveme);
+////            movecoin1.setTranslateX(movecoin1.getTranslateX()+300);
+////            reviveorc.setTranslateX(reviveorc.getTranslateX()+300);
+////            reviveyesbutton.setTranslateX(reviveyesbutton.getTranslateX()+300);
+////            revivenobutton.setTranslateX(revivenobutton.getTranslateX()+300);
+////            revivepane2.setTranslateX(revivepane2.getTranslateX()+300);
+////            saveme.setTranslateX(300);
+//                        incrementstepcounter();
+//                        TranslateTransition mc=new TranslateTransition();
+//                        mc.setNode(movecoin);
+//                        mc.setDuration(Duration.millis(300));
+//                        mc.setByX(300);
+//                        mc.play();
+//
+//                        TranslateTransition cc=new TranslateTransition();
+//                        cc.setNode(coincounter);
+//                        cc.setDuration(Duration.millis(300));
+//                        cc.setByX(300);
+//                        cc.play();
+//                        TranslateTransition sc=new TranslateTransition();
+//                        sc.setNode(stepcounter);
+//                        sc.setDuration(Duration.millis(300));
+//                        sc.setByX(300);
+//                        sc.play();
+//                        TranslateTransition trans=new TranslateTransition();
+//                        Node image=hero;
+//                        trans.setNode(image);
+//                        trans.setDuration(Duration.millis(300));
+//                        trans.setByX(300);
+//                        trans.play();
+//                        // h.moveright();
+//                        RotateTransition rax=new RotateTransition();
+//                        rax.setNode(axe);
+//                        rax.setDuration(Duration.millis(300));
+//                        rax.setCycleCount(2);
+//                        rax.setByAngle(360);
+//                        rax.play();
+////            if(axefound==1) {
+////                axe.setOpacity(1);
+////            }
+//                        TranslateTransition k1=new TranslateTransition();
+//                        k1.setNode(knife1);
+//                        k1.setDuration(Duration.millis(300));
+//                        k1.setByX(450);
+//                        k1.setOnFinished(e->kfinish(knife1));
+//                        k1.play();
+//                        TranslateTransition k2=new TranslateTransition();
+//                        k2.setNode(knife2);
+//                        k2.setDuration(Duration.millis(100));
+//                        k2.setByX(100);
+//                        k2.setOnFinished(e->knife2finished());
+//                        k2.play();
+//                        TranslateTransition k3=new TranslateTransition();
+//                        k3.setNode(knife3);
+//                        k3.setDuration(Duration.millis(200));
+//                        k3.setByX(200);
+//                        k3.setOnFinished(e->knife3finished());
+//                        k3.play();
+//
+//                        TranslateTransition ax=new TranslateTransition();
+//                        ax.setNode(axe);
+//                        ax.setDuration(Duration.millis(300));
+//                        ax.setByX(450);
+//                        ax.setOnFinished(e -> axreturn());
+//                        ax.play();
+//
+//                        SequentialTransition sq=new SequentialTransition(ax);
+
+//                    }
+//
+//                }
+//
+//            });
+//
+//
+//        }
+//    }
     public void checkherodead(){
-        if(hero.getBoundsInParent().getCenterY()>800){
+        if(hero.getBoundsInParent().getCenterY()>900){
             if(herodead==0) {
                 herodead = 1;
-                revivebutton.fire();
+               //revivebutton.fire();
+                //hero.setOpacity(0);
+                showrevivescene();
             }
         }
     }
@@ -2106,37 +2468,54 @@ public class Controller implements Initializable {
         }
     }
     public void ReviveUsingCoins(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/sample/reviveScene.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root,1100,800);
-        stage.setScene(scene);
-        stage.show();
+//        Parent root = FXMLLoader.load(getClass().getResource("/sample/ReviveScene2.fxml"));
+//        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+//        scene = new Scene(root,1100,800);
+//        stage.setScene(scene);
+//        stage.show();
+    }
+    public void Revive(Stage stage) throws IOException {
+//        Parent root = FXMLLoader.load(getClass().getResource("ReviveScene2.fxml"));
+//        scene = new Scene(root,1100,800);
+//        stage.setTitle("Will Hero");
+//        stage.setScene(scene);
+//        stage.show();
     }
     public void switchToGame(ActionEvent event) throws IOException {
+        System.out.println("Inside switchtogame");
         FXMLLoader ld=new FXMLLoader(getClass().getResource("sample.fxml"));
         root=ld.load();
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Controller cont=ld.getController();
         stage.setTitle("Will Hero");
         scene=new Scene(root,1100,800);
+        //camera=new PerspectiveCamera();
         scene.setCamera(camera);
         stage.setScene(scene);
         plist.add(platform1);
-        h=new Hero(hero);
         scene.setOnKeyPressed(new EventHandler<javafx.scene.input.KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
                 if (keyEvent.getText().equals("d")) {
-
-                    TranslateTransition trans=new TranslateTransition();
-                    trans.setNode(camera);
-                    trans.setDuration(Duration.millis(300));
-                    trans.setByX(300);
-                    trans.play();
+                    System.out.println(herodead);
+                    if(herodead!=1) {
+                        TranslateTransition trans = new TranslateTransition();
+                        trans.setNode(camera);
+                        trans.setDuration(Duration.millis(300));
+                        trans.setByX(300);
+                        trans.play();
+                    }
 
                 }
                 if(keyEvent.getText().equals("p")){
-                    try{pause(stage);}
+                    try{
+                        pause(stage);}
+                    catch(Exception e){
+                        e.printStackTrace();
+                    }
+                }
+                if(keyEvent.getText().equals("r")){
+                    try{Revive(stage);}
                     catch(Exception e){
                         e.printStackTrace();
                     }
@@ -2145,11 +2524,31 @@ public class Controller implements Initializable {
 
         });
 
-
         stage.show();
+
+    }
+
+    public void movecamera(){
+//        if(hero.getOpacity()==0){
+//            return;
+//        }
+        TranslateTransition trans=new TranslateTransition();
+        trans.setNode(camera);
+        trans.setDuration(Duration.millis(300));
+        trans.setByX(300);
+        trans.play();
+    }
+    public void moveloadedcamera(){
+        if(cameracheck==0) {
+            if(camera.getTranslateX()!=hero.getTranslateX()) {
+                cameracheck = 1;
+                camera.setTranslateX(hero.getTranslateX());
+            }
+        }
     }
     public void switchToMainMenu(ActionEvent event) throws IOException {
-
+        Hero r=new Hero();
+        r.serialise();
         root = FXMLLoader.load(getClass().getResource("/sample/MainMenu.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root,1100,800);
@@ -2158,6 +2557,7 @@ public class Controller implements Initializable {
     }
 
     public void pause(Stage stage) throws IOException {
+
         Parent root = FXMLLoader.load(getClass().getResource("pauseDestination.fxml"));
         scene = new Scene(root,1100,800);
         stage.setTitle("Will Hero");
@@ -2180,9 +2580,9 @@ public class Controller implements Initializable {
 
                     if (herotop < orcdown) {
                         if (orcdown < herotop + 10) {
-                            if(scenecheck==0) {
-                                scenecheck=1;
-                                revivebutton.fire();
+                            if(herodead==0) {
+                                herodead=1;
+                                showrevivescene();
                             }
                         }
                     }
@@ -2249,6 +2649,20 @@ public class Controller implements Initializable {
         ax.setByX(300);
         ax.play();
 
+    }
+    public void showrevivescene(){
+        movecoin1.setOpacity(1);
+        reviveorc.setOpacity(1);
+        revivenobutton.setOpacity(1);
+        reviveyesbutton.setOpacity(1);
+        revivepane2.setOpacity(1);
+        saveme.setOpacity(1);
+        double r=will.getPosition().getX_position();
+//        movecoin1.setTranslateX(r);
+//        reviveorc.setTranslateX(r);
+//        reviveyesbutton.setTranslateX(r);
+//        revivenobutton.setTranslateX(r);
+//        revivepane2.setTranslateX(r+350);
     }
     public void orcCollisionwithplatform(ImageView orc,ImageView platform){
         double orctop=orc.getBoundsInParent().getMinY();
@@ -2324,6 +2738,15 @@ public class Controller implements Initializable {
             if ((int) herobottom >= (int) ptop) {
                 if ((int) ptop + 15 >= (int) herobottom) {
 //                    axe.setY(hero.getBoundsInParent().getCenterY());
+                    if(herodead==0) {
+                        will.getPosition().setX_position(hero.getTranslateX());
+                        System.out.println(will.getPosition().getX_position());
+                        try {
+                            will.serialise();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
                     TranslateTransition k1=new TranslateTransition();
                     k1.setNode(knife1);
                     k1.setDuration(Duration.millis(300));
@@ -2716,6 +3139,32 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        System.out.println("Inside initialise");
+        Hero k=new Hero();
+        try {
+            will = k.derialise();
+        }
+        catch(Exception e) {
+
+        }
+        hero.setOpacity(1);
+        double x=will.getPosition().getX_position();
+        stepcounter.setTranslateX(x);
+        coincounter.setTranslateX(x);
+        movecoin.setTranslateX(x);
+        hero.setTranslateX(x);
+        camera.setTranslateX(x);
+        axe.setTranslateX(x);
+        knife1.setTranslateX(x);
+        knife2.setTranslateX(x);
+        knife3.setTranslateX(x);
+        revivepane2.setTranslateX(x);
+        hero.setTranslateY(-300);
+        axe.setTranslateY(-300);
+        knife1.setTranslateY(-300);
+        knife2.setTranslateY(-300);
+        knife3.setTranslateY(-300);
+
         herowithchest.start();
         axecollision.start();
         collisionfps.start();
@@ -2754,7 +3203,14 @@ public class Controller implements Initializable {
         knife1.setOpacity(0);
         knife2.setOpacity(0);
         knife3.setOpacity(0);
-        g=new Game();
+        finished();
+        saveme.setOpacity(0);
+        movecoin1.setOpacity(0);
+        reviveorc.setOpacity(0);
+        revivenobutton.setOpacity(0);
+        reviveyesbutton.setOpacity(0);
+        revivepane2.setOpacity(0);
+
     }
     public void orcjump(ImageView orc){
         TranslateTransition trans1=new TranslateTransition();
@@ -2766,11 +3222,34 @@ public class Controller implements Initializable {
         //trans.setAutoReverse(true);
         trans1.play();
     }
+    public void moverevive(Node s){
+        TranslateTransition mc=new TranslateTransition();
+        mc.setNode(s);
+        mc.setDuration(Duration.millis(300));
+        mc.setByX(300);
+        mc.play();
+    }
     public void moveright(KeyEvent keyEvent){
 //        pauseButton.setX(pauseButton.getX()+96);
         // pauseButton.setLayoutX(pauseButton.getLayoutX()+96);
         // pauseButton.setTranslateX(pauseButton.getTranslateX()+96);
+        if(herodead==1){
+            System.out.println("cant move");
+            return;
+        }
         if(keyEvent.getText().equals("d")) {
+//            moverevive(movecoin1);
+//            moverevive(reviveorc);
+//            moverevive(reviveyesbutton);
+//            moverevive(revivenobutton);
+            moverevive(revivepane2);
+           // moverevive(saveme);
+//            movecoin1.setTranslateX(movecoin1.getTranslateX()+300);
+//            reviveorc.setTranslateX(reviveorc.getTranslateX()+300);
+//            reviveyesbutton.setTranslateX(reviveyesbutton.getTranslateX()+300);
+//            revivenobutton.setTranslateX(revivenobutton.getTranslateX()+300);
+//            revivepane2.setTranslateX(revivepane2.getTranslateX()+300);
+//            saveme.setTranslateX(300);
             incrementstepcounter();
             TranslateTransition mc=new TranslateTransition();
             mc.setNode(movecoin);
@@ -2830,8 +3309,93 @@ public class Controller implements Initializable {
             ax.setOnFinished(e -> axreturn());
             ax.play();
 
+            SequentialTransition sq=new SequentialTransition(ax);
 
         }
+    }
+    public void moveright(){
+//        pauseButton.setX(pauseButton.getX()+96);
+        // pauseButton.setLayoutX(pauseButton.getLayoutX()+96);
+        // pauseButton.setTranslateX(pauseButton.getTranslateX()+96);
+        if(herodead==1){
+            System.out.println("cant move");
+            return;
+        }
+
+//            moverevive(movecoin1);
+//            moverevive(reviveorc);
+//            moverevive(reviveyesbutton);
+//            moverevive(revivenobutton);
+            moverevive(revivepane2);
+            // moverevive(saveme);
+//            movecoin1.setTranslateX(movecoin1.getTranslateX()+300);
+//            reviveorc.setTranslateX(reviveorc.getTranslateX()+300);
+//            reviveyesbutton.setTranslateX(reviveyesbutton.getTranslateX()+300);
+//            revivenobutton.setTranslateX(revivenobutton.getTranslateX()+300);
+//            revivepane2.setTranslateX(revivepane2.getTranslateX()+300);
+//            saveme.setTranslateX(300);
+            incrementstepcounter();
+            TranslateTransition mc=new TranslateTransition();
+            mc.setNode(movecoin);
+            mc.setDuration(Duration.millis(300));
+            mc.setByX(300);
+            mc.play();
+
+            TranslateTransition cc=new TranslateTransition();
+            cc.setNode(coincounter);
+            cc.setDuration(Duration.millis(300));
+            cc.setByX(300);
+            cc.play();
+            TranslateTransition sc=new TranslateTransition();
+            sc.setNode(stepcounter);
+            sc.setDuration(Duration.millis(300));
+            sc.setByX(300);
+            sc.play();
+            TranslateTransition trans=new TranslateTransition();
+            Node image=hero;
+            trans.setNode(image);
+            trans.setDuration(Duration.millis(300));
+            trans.setByX(300);
+            trans.play();
+            // h.moveright();
+            RotateTransition rax=new RotateTransition();
+            rax.setNode(axe);
+            rax.setDuration(Duration.millis(300));
+            rax.setCycleCount(2);
+            rax.setByAngle(360);
+            rax.play();
+//            if(axefound==1) {
+//                axe.setOpacity(1);
+//            }
+            TranslateTransition k1=new TranslateTransition();
+            k1.setNode(knife1);
+            k1.setDuration(Duration.millis(300));
+            k1.setByX(450);
+            k1.setOnFinished(e->kfinish(knife1));
+            k1.play();
+            TranslateTransition k2=new TranslateTransition();
+            k2.setNode(knife2);
+            k2.setDuration(Duration.millis(100));
+            k2.setByX(100);
+            k2.setOnFinished(e->knife2finished());
+            k2.play();
+            TranslateTransition k3=new TranslateTransition();
+            k3.setNode(knife3);
+            k3.setDuration(Duration.millis(200));
+            k3.setByX(200);
+            k3.setOnFinished(e->knife3finished());
+            k3.play();
+
+            TranslateTransition ax=new TranslateTransition();
+            ax.setNode(axe);
+            ax.setDuration(Duration.millis(300));
+            ax.setByX(450);
+            ax.setOnFinished(e -> axreturn());
+            ax.play();
+
+            SequentialTransition sq=new SequentialTransition(ax);
+
+
     }
     public void kfinish(ImageView knife){
         double r=hero.getBoundsInParent().getCenterX();

@@ -29,7 +29,7 @@ public class Game extends Application implements Serializable {
     public void start(Stage stage){
         FXMLLoader ld=new FXMLLoader(Main.class.getResource("sample.fxml"));
         Controller cd=ld.getController();
-        WillHero =new Hero(cd.getheroimg());
+       //WillHero =new Hero(cd.getheroimg());
     }
     public Hero getWillHero(){
         return WillHero;
