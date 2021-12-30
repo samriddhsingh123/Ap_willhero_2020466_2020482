@@ -14,14 +14,29 @@ public class Hero extends Mortals{
     private Coin coin;
     private Weapon w;
     private ImageView hero;
+    private int step=0;
+    private int w1=0;
     Hero(){
+        coin=new Coin();
+        coin.setCoinVal(0);
         Position p=new Position();
         p.setX_position(0);
         p.setY_position(-100);
         setPosition(p);
 
     }
-
+    public void setw1(int r){
+        w1=r;
+    }
+    public int getw1(){
+        return w1;
+    }
+    public void setstep(int r){
+        step=r;
+    }
+    public int getstep(){
+        return step;
+    }
     public void moveright(){
         TranslateTransition trans=new TranslateTransition();
         Node image=hero;

@@ -449,9 +449,14 @@ public class Controller implements Initializable {
     public ImageView getheroimg(){
         return hero;
     }
+    public void setcoincounter(int c){
+        int num=Integer.parseInt(coincounter.getText());
+        coincounter.setText(Integer.toString(c));
+    }
     public void changecoincounter(int i){
         int num=Integer.parseInt(coincounter.getText());
         coincounter.setText(Integer.toString(num+i));
+        will.getCoin().setCoinVal(num+i);
     }
     public void incrementstepcounter(){
         int num=Integer.parseInt(stepcounter.getText());
@@ -2739,6 +2744,17 @@ public class Controller implements Initializable {
                 if ((int) ptop + 15 >= (int) herobottom) {
 //                    axe.setY(hero.getBoundsInParent().getCenterY());
                     if(herodead==0) {
+                        if((int)hero.getTranslateX()!=0){
+                        int num=Integer.parseInt(coincounter.getText());
+                        will.getCoin().setCoinVal(num);
+                        int step=Integer.parseInt(stepcounter.getText());
+                        will.setstep(step);
+                        if(axe.getOpacity()==1){
+                            will.setw1(1);
+                        }
+                        if(knife1.getOpacity()==1){
+                            will.setw1(2);
+                        }
                         will.getPosition().setX_position(hero.getTranslateX());
                         System.out.println(will.getPosition().getX_position());
                         try {
@@ -2746,7 +2762,7 @@ public class Controller implements Initializable {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                    }
+                    }}
                     TranslateTransition k1=new TranslateTransition();
                     k1.setNode(knife1);
                     k1.setDuration(Duration.millis(300));
@@ -3155,6 +3171,20 @@ public class Controller implements Initializable {
         hero.setTranslateX(x);
         camera.setTranslateX(x);
         axe.setTranslateX(x);
+        setcoincounter(will.getCoin().getCoinVal());
+        setstepcounter(will.getstep());
+        axe.setOpacity(0);
+        knife1.setOpacity(0);
+        knife2.setOpacity(0);
+        knife3.setOpacity(0);
+        if(will.getw1()==1){
+            axe.setOpacity(1);
+        }
+        if(will.getw1()==2){
+            knife1.setOpacity(1);
+            knife2.setOpacity(1);
+            knife2.setOpacity(1);
+        }
         knife1.setTranslateX(x);
         knife2.setTranslateX(x);
         knife3.setTranslateX(x);
@@ -3199,10 +3229,7 @@ public class Controller implements Initializable {
         moveisland(150,platform32);
         moveisland(250,platform33);
         moveisland(-225,platform34);
-        axe.setOpacity(0);
-        knife1.setOpacity(0);
-        knife2.setOpacity(0);
-        knife3.setOpacity(0);
+
         finished();
         saveme.setOpacity(0);
         movecoin1.setOpacity(0);

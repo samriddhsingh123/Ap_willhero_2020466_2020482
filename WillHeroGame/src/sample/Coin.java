@@ -1,6 +1,8 @@
 package sample;
 
-public class Coin {
+import java.io.Serializable;
+
+public class Coin implements Serializable {
     private int coin;
 
     public int getCoinVal() {
