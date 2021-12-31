@@ -16,6 +16,7 @@ public class Hero extends Mortals{
     private ImageView hero;
     private int step=0;
     private int w1=0;
+    private boolean isalive=true;
     Hero(){
         coin=new Coin();
         coin.setCoinVal(0);
@@ -61,7 +62,10 @@ public class Hero extends Mortals{
     }
     @Override
     public void die() {
-
+        isalive=false;
+    }
+    public boolean getisalive(){
+        return isalive;
     }
     public void serialise() throws IOException {
         FileOutputStream fout=new FileOutputStream("resume.txt");

@@ -12,6 +12,11 @@
 
 <AnchorPane fx:id="orc23" cache="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="45000.0" style="-fx-background-color: #30b4e8#30b4e8;" styleClass="main" stylesheets="@background.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
+      <ImageView fx:id="background" fitHeight="863.0" layoutX="-200.0" fitWidth="1475.0" layoutY="-14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@png2jpg/sky12.jpg" />
+         </image>
+      </ImageView>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="837.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images2/Tree3.png" />
@@ -1057,22 +1062,22 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <Label fx:id="coincounter" alignment="CENTER" layoutX="929.0" layoutY="31.0" prefHeight="84.0" prefWidth="121.0" text="0" textFill="#e1f754">
+      <Label fx:id="coincounter" alignment="CENTER" layoutX="867.0" layoutY="31.0" prefHeight="84.0" prefWidth="121.0" text="0" textFill="#e1f754">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <ImageView fx:id="movecoin" fitHeight="90.0" fitWidth="56.0" layoutX="1013.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="movecoin" fitHeight="90.0" fitWidth="56.0" layoutX="951.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images2/Coin.png" />
          </image>
       </ImageView>
       <Button fx:id="revivebutton" layoutX="1130.0" layoutY="690.0" mnemonicParsing="false" onAction="#ReviveUsingCoins" style="-fx-opacity: 0;" text="Button" />
-      <DialogPane fx:id="revivepane2" layoutX="57.0" layoutY="146.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="539.0" prefWidth="971.0" style="-fx-background-color: #d382ff#d382ff;">
+      <DialogPane fx:id="revivepane2" contentText="SAVE ME!!!!!!!!" layoutX="57.0" layoutY="146.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="539.0" prefWidth="971.0" style="-fx-background-color: #d382ff#d382ff;">
           <header>
             <AnchorPane fx:id="revivepane" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="320.0">
                <children>
-                  <Label fx:id="saveme" layoutX="360.0" layoutY="125.0" text="SAVE ME!!!!!">
+                  <Label fx:id="saveme" layoutX="360.0" layoutY="125.0">
                      <font>
                         <Font size="45.0" />
                      </font>

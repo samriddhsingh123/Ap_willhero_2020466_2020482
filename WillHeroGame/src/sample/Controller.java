@@ -423,11 +423,13 @@ public class Controller implements Initializable {
     private Button reviveyesbutton;
     @FXML
     private ImageView movecoin1;
+    @FXML
+    private ImageView background;
 
     private int cameracheck=0;
     private Hero will;
     private int bossisdead=0;
-    private int bosslife=1000;
+    private int bosslife=30;
     //private int scenecheck=0;
     private Game g;
     private Hero h;
@@ -456,7 +458,7 @@ public class Controller implements Initializable {
     public void changecoincounter(int i){
         int num=Integer.parseInt(coincounter.getText());
         coincounter.setText(Integer.toString(num+i));
-        will.getCoin().setCoinVal(num+i);
+       // will.getCoin().setCoinVal(num+i);
     }
     public void incrementstepcounter(){
         int num=Integer.parseInt(stepcounter.getText());
@@ -512,6 +514,13 @@ public class Controller implements Initializable {
                                      //   revivebutton.fire();
 
                                         herodead=1;
+                                        will.die();
+                                        try{
+                                            will.serialise();
+                                        }
+                                        catch(Exception e){
+
+                                        }
                                         showrevivescene();
 
                                     }
@@ -522,35 +531,35 @@ public class Controller implements Initializable {
                                 TranslateTransition trans = new TranslateTransition();
                                 trans.setNode(boss);
                                 trans.setDuration(Duration.millis(100));
-                                trans.setByX(100);
+                                trans.setByX(200);
                                 trans.setOnFinished(e -> finished1(boss));
                                 trans.play();
-                                TranslateTransition trans2 = new TranslateTransition();
-                                trans2.setNode(camera);
-                                trans2.setByX(-10);
-
-                                TranslateTransition trans1 = new TranslateTransition();
-                                trans1.setNode(hero);
-                                trans1.setByX(-10);
-                                trans1.play();
-                                trans2.play();
-                                TranslateTransition ax = new TranslateTransition();
-                                ax.setNode(axe);
-                                ax.setByX(-10);
-                                ax.play();
-                                trans.play();
-                                TranslateTransition k1 = new TranslateTransition();
-                                k1.setNode(knife1);
-                                k1.setByX(-10);
-                                k1.play();
-                                TranslateTransition k2 = new TranslateTransition();
-                                k2.setNode(knife2);
-                                k2.setByX(-10);
-                                k2.play();
-                                TranslateTransition k3 = new TranslateTransition();
-                                k3.setNode(knife3);
-                                k3.setByY(-10);
-                                k3.play();
+//                                TranslateTransition trans2 = new TranslateTransition();
+//                                trans2.setNode(camera);
+//                                trans2.setByX(-10);
+//
+//                                TranslateTransition trans1 = new TranslateTransition();
+//                                trans1.setNode(hero);
+//                                trans1.setByX(-10);
+//                                trans1.play();
+//                                trans2.play();
+//                                TranslateTransition ax = new TranslateTransition();
+//                                ax.setNode(axe);
+//                                ax.setByX(-10);
+//                                ax.play();
+//                                trans.play();
+//                                TranslateTransition k1 = new TranslateTransition();
+//                                k1.setNode(knife1);
+//                                k1.setByX(-10);
+//                                k1.play();
+//                                TranslateTransition k2 = new TranslateTransition();
+//                                k2.setNode(knife2);
+//                                k2.setByX(-10);
+//                                k2.play();
+//                                TranslateTransition k3 = new TranslateTransition();
+//                                k3.setNode(knife3);
+//                                k3.setByY(-10);
+//                                k3.play();
                             }
 
                         }
@@ -2341,7 +2350,14 @@ public class Controller implements Initializable {
     public void setyesrevive(ActionEvent actionEvent) {
 
         if (Integer.parseInt(coincounter.getText()) >= 10) {
-            //setcoincounter=-10;
+            changecoincounter(-10);
+            will.getCoin().setCoinVal(Integer.parseInt(coincounter.getText()));
+            try{
+                will.serialise();
+            }
+            catch(Exception e){
+
+            }
             Controller2 cd = new Controller2();
             try {
                 cd.switchToScene1(actionEvent);
@@ -2487,7 +2503,7 @@ public class Controller implements Initializable {
 //        stage.show();
     }
     public void switchToGame(ActionEvent event) throws IOException {
-        System.out.println("Inside switchtogame");
+
         FXMLLoader ld=new FXMLLoader(getClass().getResource("sample.fxml"));
         root=ld.load();
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -2502,14 +2518,13 @@ public class Controller implements Initializable {
             @Override
             public void handle(KeyEvent keyEvent) {
                 if (keyEvent.getText().equals("d")) {
-                    System.out.println(herodead);
-                    if(herodead!=1) {
-                        TranslateTransition trans = new TranslateTransition();
-                        trans.setNode(camera);
-                        trans.setDuration(Duration.millis(300));
-                        trans.setByX(300);
-                        trans.play();
-                    }
+
+                            TranslateTransition trans = new TranslateTransition();
+                            trans.setNode(camera);
+                            trans.setDuration(Duration.millis(300));
+                            trans.setByX(300);
+                            trans.play();
+
 
                 }
                 if(keyEvent.getText().equals("p")){
@@ -2588,6 +2603,13 @@ public class Controller implements Initializable {
                             if(herodead==0) {
                                 herodead=1;
                                 showrevivescene();
+                                will.die();
+                                try{
+                                    will.serialise();
+                                }
+                                catch(Exception e){
+
+                                }
                             }
                         }
                     }
@@ -2756,8 +2778,9 @@ public class Controller implements Initializable {
                             will.setw1(2);
                         }
                         will.getPosition().setX_position(hero.getTranslateX());
-                        System.out.println(will.getPosition().getX_position());
+
                         try {
+
                             will.serialise();
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -3125,37 +3148,37 @@ public class Controller implements Initializable {
     public void finished(){
         TranslateTransition k1=new TranslateTransition();
         k1.setNode(knife1);
-        k1.setDuration(Duration.millis((800-hero.getY())*3.5));
-        k1.setByY(800-hero.getY());
+        k1.setDuration(Duration.millis((900-hero.getY())*3.5));
+        k1.setByY(900-hero.getY());
         k1.play();
         TranslateTransition k2=new TranslateTransition();
         k2.setNode(knife2);
-        k2.setDuration(Duration.millis((800-hero.getY())*3.5));
-        k2.setByY(800-hero.getY());
+        k2.setDuration(Duration.millis((900-hero.getY())*3.5));
+        k2.setByY(900-hero.getY());
         k2.play();
         TranslateTransition k3=new TranslateTransition();
         k3.setNode(knife3);
-        k3.setDuration(Duration.millis((800-hero.getY())*3.5));
-        k3.setByY(800-hero.getY());
+        k3.setDuration(Duration.millis((900-hero.getY())*3.5));
+        k3.setByY(900-hero.getY());
         k3.play();
         TranslateTransition ax=new TranslateTransition();
         ax.setNode(axe);
-        ax.setDuration(Duration.millis((800-hero.getY())*3.5));
-        ax.setByY(800-hero.getY());
+        ax.setDuration(Duration.millis((900-hero.getY())*3.5));
+        ax.setByY(900-hero.getY());
         ax.play();
         TranslateTransition trans1=new TranslateTransition();
         Node image1=hero;
         trans1.setNode(image1);
-        trans1.setDuration(Duration.millis((800-hero.getY())*3.5));
+        trans1.setDuration(Duration.millis((900-hero.getY())*3.5));
         // trans.setCycleCount(2);
-        trans1.setByY(800-hero.getY());
+        trans1.setByY(900-hero.getY());
         //trans.setAutoReverse(true);
         trans1.play();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("Inside initialise");
+
         Hero k=new Hero();
         try {
             will = k.derialise();
@@ -3183,12 +3206,13 @@ public class Controller implements Initializable {
         if(will.getw1()==2){
             knife1.setOpacity(1);
             knife2.setOpacity(1);
-            knife2.setOpacity(1);
+            knife3.setOpacity(1);
         }
         knife1.setTranslateX(x);
         knife2.setTranslateX(x);
         knife3.setTranslateX(x);
         revivepane2.setTranslateX(x);
+        background.setTranslateX(x);
         hero.setTranslateY(-300);
         axe.setTranslateY(-300);
         knife1.setTranslateY(-300);
@@ -3257,27 +3281,16 @@ public class Controller implements Initializable {
         mc.play();
     }
     public void moveright(KeyEvent keyEvent){
-//        pauseButton.setX(pauseButton.getX()+96);
-        // pauseButton.setLayoutX(pauseButton.getLayoutX()+96);
-        // pauseButton.setTranslateX(pauseButton.getTranslateX()+96);
-        if(herodead==1){
-            System.out.println("cant move");
-            return;
-        }
-        if(keyEvent.getText().equals("d")) {
-//            moverevive(movecoin1);
-//            moverevive(reviveorc);
-//            moverevive(reviveyesbutton);
-//            moverevive(revivenobutton);
             moverevive(revivepane2);
-           // moverevive(saveme);
+            moverevive(background);
+            // moverevive(saveme);
 //            movecoin1.setTranslateX(movecoin1.getTranslateX()+300);
 //            reviveorc.setTranslateX(reviveorc.getTranslateX()+300);
 //            reviveyesbutton.setTranslateX(reviveyesbutton.getTranslateX()+300);
 //            revivenobutton.setTranslateX(revivenobutton.getTranslateX()+300);
 //            revivepane2.setTranslateX(revivepane2.getTranslateX()+300);
 //            saveme.setTranslateX(300);
-            incrementstepcounter();
+
             TranslateTransition mc=new TranslateTransition();
             mc.setNode(movecoin);
             mc.setDuration(Duration.millis(300));
@@ -3294,60 +3307,59 @@ public class Controller implements Initializable {
             sc.setDuration(Duration.millis(300));
             sc.setByX(300);
             sc.play();
-            TranslateTransition trans=new TranslateTransition();
-            Node image=hero;
-            trans.setNode(image);
-            trans.setDuration(Duration.millis(300));
-            trans.setByX(300);
-            trans.play();
-           // h.moveright();
-            RotateTransition rax=new RotateTransition();
-            rax.setNode(axe);
-            rax.setDuration(Duration.millis(300));
-            rax.setCycleCount(2);
-            rax.setByAngle(360);
-            rax.play();
+            if(herodead==0) {
+                incrementstepcounter();
+                TranslateTransition trans = new TranslateTransition();
+                Node image = hero;
+                trans.setNode(image);
+                trans.setDuration(Duration.millis(300));
+                trans.setByX(300);
+                trans.play();
+                // h.moveright();
+                RotateTransition rax = new RotateTransition();
+                rax.setNode(axe);
+                rax.setDuration(Duration.millis(300));
+                rax.setCycleCount(2);
+                rax.setByAngle(360);
+                rax.play();
 //            if(axefound==1) {
 //                axe.setOpacity(1);
 //            }
-            TranslateTransition k1=new TranslateTransition();
-            k1.setNode(knife1);
-            k1.setDuration(Duration.millis(300));
-            k1.setByX(450);
-            k1.setOnFinished(e->kfinish(knife1));
-            k1.play();
-            TranslateTransition k2=new TranslateTransition();
-            k2.setNode(knife2);
-            k2.setDuration(Duration.millis(100));
-            k2.setByX(100);
-            k2.setOnFinished(e->knife2finished());
-            k2.play();
-            TranslateTransition k3=new TranslateTransition();
-            k3.setNode(knife3);
-            k3.setDuration(Duration.millis(200));
-            k3.setByX(200);
-            k3.setOnFinished(e->knife3finished());
-            k3.play();
+                TranslateTransition k1 = new TranslateTransition();
+                k1.setNode(knife1);
+                k1.setDuration(Duration.millis(300));
+                k1.setByX(450);
+                k1.setOnFinished(e -> kfinish(knife1));
+                k1.play();
+                TranslateTransition k2 = new TranslateTransition();
+                k2.setNode(knife2);
+                k2.setDuration(Duration.millis(100));
+                k2.setByX(100);
+                k2.setOnFinished(e -> knife2finished());
+                k2.play();
+                TranslateTransition k3 = new TranslateTransition();
+                k3.setNode(knife3);
+                k3.setDuration(Duration.millis(200));
+                k3.setByX(200);
+                k3.setOnFinished(e -> knife3finished());
+                k3.play();
 
-            TranslateTransition ax=new TranslateTransition();
-            ax.setNode(axe);
-            ax.setDuration(Duration.millis(300));
-            ax.setByX(450);
-            ax.setOnFinished(e -> axreturn());
-            ax.play();
+                TranslateTransition ax = new TranslateTransition();
+                ax.setNode(axe);
+                ax.setDuration(Duration.millis(300));
+                ax.setByX(450);
+                ax.setOnFinished(e -> axreturn());
+                ax.play();
 
-            SequentialTransition sq=new SequentialTransition(ax);
+                SequentialTransition sq = new SequentialTransition(ax);
+            }
 
-        }
     }
     public void moveright(){
 //        pauseButton.setX(pauseButton.getX()+96);
         // pauseButton.setLayoutX(pauseButton.getLayoutX()+96);
         // pauseButton.setTranslateX(pauseButton.getTranslateX()+96);
-        if(herodead==1){
-            System.out.println("cant move");
-            return;
-        }
+
 
 //            moverevive(movecoin1);
 //            moverevive(reviveorc);
@@ -3361,7 +3373,7 @@ public class Controller implements Initializable {
 //            revivenobutton.setTranslateX(revivenobutton.getTranslateX()+300);
 //            revivepane2.setTranslateX(revivepane2.getTranslateX()+300);
 //            saveme.setTranslateX(300);
-            incrementstepcounter();
+
             TranslateTransition mc=new TranslateTransition();
             mc.setNode(movecoin);
             mc.setDuration(Duration.millis(300));
@@ -3378,50 +3390,52 @@ public class Controller implements Initializable {
             sc.setDuration(Duration.millis(300));
             sc.setByX(300);
             sc.play();
-            TranslateTransition trans=new TranslateTransition();
-            Node image=hero;
-            trans.setNode(image);
-            trans.setDuration(Duration.millis(300));
-            trans.setByX(300);
-            trans.play();
-            // h.moveright();
-            RotateTransition rax=new RotateTransition();
-            rax.setNode(axe);
-            rax.setDuration(Duration.millis(300));
-            rax.setCycleCount(2);
-            rax.setByAngle(360);
-            rax.play();
+            if(herodead==0) {
+                incrementstepcounter();
+                TranslateTransition trans = new TranslateTransition();
+                Node image = hero;
+                trans.setNode(image);
+                trans.setDuration(Duration.millis(300));
+                trans.setByX(300);
+                trans.play();
+                // h.moveright();
+                RotateTransition rax = new RotateTransition();
+                rax.setNode(axe);
+                rax.setDuration(Duration.millis(300));
+                rax.setCycleCount(2);
+                rax.setByAngle(360);
+                rax.play();
 //            if(axefound==1) {
 //                axe.setOpacity(1);
 //            }
-            TranslateTransition k1=new TranslateTransition();
-            k1.setNode(knife1);
-            k1.setDuration(Duration.millis(300));
-            k1.setByX(450);
-            k1.setOnFinished(e->kfinish(knife1));
-            k1.play();
-            TranslateTransition k2=new TranslateTransition();
-            k2.setNode(knife2);
-            k2.setDuration(Duration.millis(100));
-            k2.setByX(100);
-            k2.setOnFinished(e->knife2finished());
-            k2.play();
-            TranslateTransition k3=new TranslateTransition();
-            k3.setNode(knife3);
-            k3.setDuration(Duration.millis(200));
-            k3.setByX(200);
-            k3.setOnFinished(e->knife3finished());
-            k3.play();
+                TranslateTransition k1 = new TranslateTransition();
+                k1.setNode(knife1);
+                k1.setDuration(Duration.millis(300));
+                k1.setByX(450);
+                k1.setOnFinished(e -> kfinish(knife1));
+                k1.play();
+                TranslateTransition k2 = new TranslateTransition();
+                k2.setNode(knife2);
+                k2.setDuration(Duration.millis(100));
+                k2.setByX(100);
+                k2.setOnFinished(e -> knife2finished());
+                k2.play();
+                TranslateTransition k3 = new TranslateTransition();
+                k3.setNode(knife3);
+                k3.setDuration(Duration.millis(200));
+                k3.setByX(200);
+                k3.setOnFinished(e -> knife3finished());
+                k3.play();
 
-            TranslateTransition ax=new TranslateTransition();
-            ax.setNode(axe);
-            ax.setDuration(Duration.millis(300));
-            ax.setByX(450);
-            ax.setOnFinished(e -> axreturn());
-            ax.play();
+                TranslateTransition ax = new TranslateTransition();
+                ax.setNode(axe);
+                ax.setDuration(Duration.millis(300));
+                ax.setByX(450);
+                ax.setOnFinished(e -> axreturn());
+                ax.play();
 
-            SequentialTransition sq=new SequentialTransition(ax);
-
+                SequentialTransition sq = new SequentialTransition(ax);
+            }
 
     }
     public void kfinish(ImageView knife){
