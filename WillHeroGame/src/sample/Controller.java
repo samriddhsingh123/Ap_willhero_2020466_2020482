@@ -93,17 +93,22 @@ import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLOutput;
 import java.sql.Time;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.concurrent.TimeUnit;
 
-public class Controller implements Initializable {
+public class Controller implements Initializable{
 
     @FXML
     private ImageView axe;
@@ -425,7 +430,44 @@ public class Controller implements Initializable {
     private ImageView movecoin1;
     @FXML
     private ImageView background;
+    @FXML
+    private AnchorPane wonpane;
+    @FXML
+    private Label youwon;
+    @FXML
+    private Label toofast;
+    @FXML
+    private Label highscore;
+    @FXML
+    private Label yourscore;
+    @FXML
+    private Label yourscoreint;
+    @FXML
+    private Label highscoreint;
+    @FXML
+    private Button mainmenubutton;
+    @FXML
+    private ImageView openchest1;
+    @FXML
+    private ImageView openchest2;
+    @FXML
+    private ImageView openchest3;
+    @FXML
+    private ImageView openchest4;
+    @FXML
+    private ImageView openchest5;
+    @FXML
+    private ImageView openchest6;
+    @FXML
+    private ImageView openchest7;
+    @FXML
+    private ImageView openchest8;
+    @FXML
+    private Label timer;
 
+    private int time=120;
+    private int timeelapsed=0;
+    private Thread t;
     private int cameracheck=0;
     private Hero will;
     private int bossisdead=0;
@@ -448,6 +490,50 @@ public class Controller implements Initializable {
 //        stage.setScene(scene);
 //        stage.show();
 //    }
+    public void starttimer(){
+        t=new Thread(new Runnable() {
+            @Override
+            public synchronized void run() {
+                try {
+                    while(true){
+                        will.settimeelapsed(timeelapsed);
+                      //  System.out.println(timeelapsed);
+                        timeelapsed++;
+                        t.sleep(1000);
+
+                    }
+                }
+                catch(Exception e){
+
+                }
+            }
+        });
+        t.start();
+    }
+    public void settimelabel(){
+        if(timeelapsed>60){
+            timer.setStyle("-fx-text-fill: #ffb3b3;");
+        }
+        if(timeelapsed>90){
+            timer.setStyle("-fx-text-fill: #ff6666;");
+        }
+        if(timeelapsed>120){
+            timer.setStyle("-fx-text-fill: #ff0000;");
+        }
+        int seconds=timeelapsed%60;
+        int minutes=timeelapsed/60;
+        String text1=Integer.toString(seconds);
+        String text2=Integer.toString(minutes);
+        if(seconds<10){
+            text1="0"+Integer.toString(seconds);
+        }
+
+        if(minutes<10){
+            text2="0"+Integer.toString(minutes);
+        }
+        String text=text2+":"+text1;
+        timer.setText(text);
+    }
     public ImageView getheroimg(){
         return hero;
     }
@@ -724,6 +810,8 @@ public class Controller implements Initializable {
     AnimationTimer herowithchest=new AnimationTimer() {
         @Override
         public void handle(long l) {
+            settimelabel();
+            checkherowon();
             checkbossalive();
             checkbosscollision();
             checkherodead();
@@ -746,35 +834,52 @@ public class Controller implements Initializable {
                 if(check1==0){
                     check1=1;
                     changecoincounter(3);
+                    openchest1.setOpacity(1);
+                    chest1.setOpacity(0);
                 }
             }
             if(chest.getId().equals("chest2")){
                 axe.setOpacity(1);
                 axefound=1;
+                openchest2.setOpacity(1);
+                chest2.setOpacity(0);
             }
             if(chest.getId().equals("chest3")){
                 if(check3==0){
                     check3=1;
                     changecoincounter(3);
+                    openchest3.setOpacity(1);
+                    chest3.setOpacity(0);
                 }
             }
             if(chest.getId().equals("chest4")){
                 if(upgraded==0) {
-                    upgraded = 1;
-                    axe.setFitHeight(axe.getFitHeight() + 15);
-                    axe.setFitWidth(axe.getFitHeight() + 7.5);
+                    if(axe.getOpacity()!=0) {
+                        upgraded = 1;
+                        axe.setFitHeight(axe.getFitHeight() + 15);
+                        axe.setFitWidth(axe.getFitHeight() + 7.5);
+                        openchest4.setOpacity(1);
+                        chest4.setOpacity(0);
+                    }
+                    else{
+                        axe.setOpacity(1);
+                    }
                 }
             }
             if(chest.getId().equals("chest5")){
                 if(check5==0){
                     check5=1;
                     changecoincounter(3);
+                    openchest5.setOpacity(1);
+                    chest5.setOpacity(0);
                 }
             }
             if(chest.getId().equals("chest6")){
                 if(check6==0){
                     check6=1;
                     changecoincounter(3);
+                    openchest6.setOpacity(1);
+                    chest6.setOpacity(0);
                 }
             }
             if(chest.getId().equals("chest7")){
@@ -782,11 +887,15 @@ public class Controller implements Initializable {
                 knife1.setOpacity(1);
                 knife2.setOpacity(1);
                 knife3.setOpacity(1);
+                openchest7.setOpacity(1);
+                chest7.setOpacity(0);
             }
             if(chest.getId().equals("chest8")){
                 if(check8==0){
                     check8=1;
                     changecoincounter(3);
+                    openchest8.setOpacity(1);
+                    chest8.setOpacity(0);
                 }
             }
         }
@@ -2347,6 +2456,17 @@ public class Controller implements Initializable {
             }
         }
     }
+    public void timer(int seconds){
+//            int r=(int)System.currentTimeMillis()/1000;
+//            int diff=0;
+//            while(diff!=seconds){
+//                diff=(int)System.currentTimeMillis()/1000-r;
+//                System.out.println(diff);
+//            }
+//            System.out.println(seconds);
+
+
+    }
     public void setyesrevive(ActionEvent actionEvent) {
 
         if (Integer.parseInt(coincounter.getText()) >= 10) {
@@ -3175,9 +3295,17 @@ public class Controller implements Initializable {
         //trans.setAutoReverse(true);
         trans1.play();
     }
+//    Timer timer=new Timer(1000,new ActionListener(){
+//        @Override
+//        public void actionPerformed(ActionEvent e) {
+//
+//        }
+//    });
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+       // timer(10);
+
         savegamevar sgv=new savegamevar();
         try {
             sgv = sgv.derialise();
@@ -3223,6 +3351,7 @@ public class Controller implements Initializable {
             } catch (Exception e) {
 
             }
+            starttimer();
         }
         else if(sgv.getCounter()==0) {
             sgv.setCounter(1);
@@ -3237,6 +3366,8 @@ public class Controller implements Initializable {
         hero.setOpacity(1);
 
         double x=will.getPosition().getX_position();
+        timer.setTranslateX(x);
+        timeelapsed=will.gettimeelapsed();
         stepcounter.setTranslateX(x);
         coincounter.setTranslateX(x);
         movecoin.setTranslateX(x);
@@ -3310,7 +3441,60 @@ public class Controller implements Initializable {
         revivenobutton.setOpacity(0);
         reviveyesbutton.setOpacity(0);
         revivepane2.setOpacity(0);
+        openchest1.setOpacity(0);
+        openchest2.setOpacity(0);
+        openchest3.setOpacity(0);
+        openchest4.setOpacity(0);
+        openchest5.setOpacity(0);
+        openchest6.setOpacity(0);
+        openchest7.setOpacity(0);
+        openchest8.setOpacity(0);
+        wonpane.setOpacity(0);
+        youwon.setOpacity(0);
+        toofast.setOpacity(0);
+        highscore.setOpacity(0);
+        yourscore.setOpacity(0);
+        yourscoreint.setOpacity(0);
+        highscoreint.setOpacity(0);
+        mainmenubutton.setOpacity(0);
+    }
+    public void checkherowon(){
+        if(hero.getBoundsInParent().getCenterX()>41500){
+            if(timeelapsed<=120) {
+                will.setScore(2*(8 * will.getCoin().getCoinVal() + will.getstep()));
+                toofast.setOpacity(1);
+                yourscoreint.setText(Integer.toString(will.getScore()));
+            }
+            else{
+                will.setScore(2*(8 * will.getCoin().getCoinVal() + will.getstep()));
+                yourscoreint.setText(Integer.toString(will.getScore()));
+            }
+            highscore h=new highscore();
+            try {
+                h = h.derialise();
+            }
+            catch(Exception e){
 
+            }
+            if(will.getScore()>h.getHighscore()){
+                h.setHighscore(will.getScore());
+            }
+            try{
+                h.serialise();
+            }
+            catch(Exception e){
+
+            }
+            highscoreint.setText(Integer.toString(h.getHighscore()));
+            wonpane.setOpacity(1);
+            youwon.setOpacity(1);
+
+            highscore.setOpacity(1);
+            yourscore.setOpacity(1);
+            yourscoreint.setOpacity(1);
+            highscoreint.setOpacity(1);
+            mainmenubutton.setOpacity(1);
+        }
     }
     public void orcjump(ImageView orc){
         TranslateTransition trans1=new TranslateTransition();
@@ -3333,6 +3517,8 @@ public class Controller implements Initializable {
         if(keyEvent.getText().equals("d")){
             moverevive(revivepane2);
             moverevive(background);
+            moverevive(saveme);
+            moverevive(timer);
             // moverevive(saveme);
 //            movecoin1.setTranslateX(movecoin1.getTranslateX()+300);
 //            reviveorc.setTranslateX(reviveorc.getTranslateX()+300);
@@ -3554,5 +3740,7 @@ public class Controller implements Initializable {
 //            t1.play();
 //        }
     }
+
+
 }
 

@@ -17,6 +17,8 @@ public class Hero extends Mortals{
     private int step=0;
     private int w1=0;
     private boolean isalive=true;
+    private int score=0;
+    private int timeelapsed=0;
     Hero(){
         coin=new Coin();
         coin.setCoinVal(0);
@@ -25,6 +27,18 @@ public class Hero extends Mortals{
         p.setY_position(-100);
         setPosition(p);
 
+    }
+    public void settimeelapsed(int r){
+        timeelapsed=r;
+    }
+    public int gettimeelapsed(){
+        return timeelapsed;
+    }
+    public int getScore(){
+        return score;
+    }
+    public void setScore(int r){
+        score=r;
     }
     public void setw1(int r){
         w1=r;

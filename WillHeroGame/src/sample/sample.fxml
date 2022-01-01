@@ -12,7 +12,7 @@
 
 <AnchorPane fx:id="orc23" cache="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="45000.0" style="-fx-background-color: #30b4e8#30b4e8;" styleClass="main" stylesheets="@background.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
-      <ImageView fx:id="background" fitHeight="863.0" layoutX="-200.0" fitWidth="1475.0" layoutY="-14.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="background" fitHeight="863.0" fitWidth="1475.0" layoutX="-200.0" layoutY="-14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@png2jpg/sky12.jpg" />
          </image>
@@ -1073,41 +1073,35 @@
          </image>
       </ImageView>
       <Button fx:id="revivebutton" layoutX="1130.0" layoutY="690.0" mnemonicParsing="false" onAction="#ReviveUsingCoins" style="-fx-opacity: 0;" text="Button" />
-      <DialogPane fx:id="revivepane2" contentText="SAVE ME!!!!!!!!" layoutX="57.0" layoutY="146.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="539.0" prefWidth="971.0" style="-fx-background-color: #d382ff#d382ff;">
-          <header>
-            <AnchorPane fx:id="revivepane" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="320.0">
-               <children>
-                  <Label fx:id="saveme" layoutX="360.0" layoutY="125.0">
-                     <font>
-                        <Font size="45.0" />
-                     </font>
-                  </Label>
-               </children>
-            </AnchorPane>
-          </header>
+      <DialogPane fx:id="revivepane2" headerText="                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           SAVE ME!!!" layoutX="45.0" layoutY="146.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="539.0" prefWidth="971.0" style="-fx-background-color: #d382ff#d382ff;">
           <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="320.0">
                <children>
-                  <Button fx:id="revivenobutton" layoutX="348.0" layoutY="13.0" mnemonicParsing="false" onAction="#switchToMainMenu" prefHeight="53.0" prefWidth="124.0" styleClass="Creditbg" stylesheets="@background.css" text="NO">
+                  <Button fx:id="revivenobutton" layoutX="448.0" layoutY="178.0" mnemonicParsing="false" onAction="#switchToMainMenu" prefHeight="53.0" prefWidth="124.0" styleClass="Creditbg" stylesheets="@background.css" text="NO">
                      <font>
                         <Font size="30.0" />
                      </font>
                   </Button>
-                  <Button fx:id="reviveyesbutton" layoutX="505.0" layoutY="13.0" mnemonicParsing="false" onAction="#setyesrevive" prefHeight="53.0" prefWidth="124.0" styleClass="Creditbg" stylesheets="@background.css" text="10">
+                  <Button fx:id="reviveyesbutton" layoutX="605.0" layoutY="178.0" mnemonicParsing="false" onAction="#setyesrevive" prefHeight="53.0" prefWidth="124.0" styleClass="Creditbg" stylesheets="@background.css" text="10">
                      <font>
                         <Font size="31.0" />
                      </font>
                   </Button>
-                  <ImageView fx:id="movecoin1" fitHeight="90.0" fitWidth="56.0" layoutX="613.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="movecoin1" fitHeight="90.0" fitWidth="56.0" layoutX="713.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@Images2/Coin.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="reviveorc" fitHeight="150.0" fitWidth="200.0" layoutX="81.0" layoutY="-57.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="reviveorc" fitHeight="150.0" fitWidth="200.0" layoutX="181.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@Images2/Helmet3.png" />
                      </image>
                   </ImageView>
+                  <Label fx:id="saveme" layoutX="346.0" layoutY="137.0">
+                     <font>
+                        <Font size="45.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
           </content>
@@ -1115,6 +1109,92 @@
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="320.0" />
           </expandableContent>
       </DialogPane>
+      <AnchorPane fx:id="wonpane" layoutX="41731.0" layoutY="132.0" prefHeight="583.0" prefWidth="1096.0" style="-fx-background-color: #66ff66;">
+         <children>
+            <Label fx:id="toofast" alignment="CENTER" prefHeight="96.0" prefWidth="961.0" text="You were too fast!!! Your score gets doubled...." textFill="#ff00e5">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <Label fx:id="yourscore" prefHeight="134.0" prefWidth="310.0" text="YOUR SCORE">
+               <font>
+                  <Font size="48.0" />
+               </font>
+               <graphic>
+                  <Label fx:id="youwon" alignment="CENTER" prefHeight="157.0" prefWidth="964.0" text="YOU WON!!" textFill="RED">
+                     <font>
+                        <Font size="64.0" />
+                     </font>
+                  </Label>
+               </graphic>
+            </Label>
+            <Label fx:id="highscore" prefHeight="134.0" prefWidth="310.0" text="HIGH SCORE">
+               <font>
+                  <Font size="48.0" />
+               </font>
+            </Label>
+            <Label fx:id="highscoreint" alignment="CENTER" prefHeight="70.0" prefWidth="128.0" text="000">
+               <font>
+                  <Font size="48.0" />
+               </font>
+            </Label>
+            <Label fx:id="yourscoreint" alignment="CENTER" prefHeight="70.0" prefWidth="128.0" text="000">
+               <font>
+                  <Font size="48.0" />
+               </font>
+            </Label>
+            <Button fx:id="mainmenubutton" mnemonicParsing="false" onAction="#switchToMainMenu" prefHeight="82.0" prefWidth="223.0" style="-fx-background-color: #66ffff#66ffff;" text="MainMenu">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <ImageView fx:id="openchest1" fitHeight="82.0" fitWidth="146.0" layoutX="4613.0" layoutY="331.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images2/ChestOpen.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="openchest2" fitHeight="82.0" fitWidth="146.0" layoutX="6715.0" layoutY="322.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images2/ChestOpen.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="openchest3" fitHeight="82.0" fitWidth="146.0" layoutX="10137.0" layoutY="311.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images2/ChestOpen.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="openchest4" fitHeight="82.0" fitWidth="146.0" layoutX="12319.0" layoutY="285.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images2/ChestOpen.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="openchest5" fitHeight="82.0" fitWidth="146.0" layoutX="17590.0" layoutY="316.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images2/ChestOpen.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="openchest6" fitHeight="82.0" fitWidth="146.0" layoutX="23410.0" layoutY="294.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images2/ChestOpen.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="openchest7" fitHeight="82.0" fitWidth="146.0" layoutX="28776.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images2/ChestOpen.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="openchest8" fitHeight="82.0" fitWidth="146.0" layoutX="35508.0" layoutY="249.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images2/ChestOpen.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="timer" layoutX="74.0" layoutY="44.0" text="00:00" textFill="#f2d0d0">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
 
    </children>
    <rotationAxis>
