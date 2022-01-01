@@ -43,6 +43,141 @@ public class Controller2 {
         Controller cont=ld.getController();
         cont.switchToGame(event);
     }
+    public void loadnewgame(ActionEvent event){
+        savegamevar sgv=new savegamevar();
+        try {
+            sgv = sgv.derialise();
+        }
+        catch(Exception e){
+
+        }
+        sgv.setLocation(0);
+        try{
+            sgv.serialise();
+            switchToScene1(event);
+        }
+        catch(Exception e){
+
+        }
+
+    }
+    public void loadsavedgame1(ActionEvent event){
+        savegamevar sgv=new savegamevar();
+        try {
+            sgv = sgv.derialise();
+        }
+        catch(Exception e){
+
+        }
+        sgv.setLocation(1);
+        try{
+            sgv.serialise();
+            switchToScene1(event);
+        }
+        catch(Exception e){
+
+        }
+    }
+    public void loadsavedgame2(ActionEvent event){
+        savegamevar sgv=new savegamevar();
+        try {
+            sgv = sgv.derialise();
+        }
+        catch(Exception e){
+
+        }
+        sgv.setLocation(2);
+        try{
+            sgv.serialise();
+            switchToScene1(event);
+        }
+        catch(Exception e){
+
+        }
+    }
+    public void loadsavedgame3(ActionEvent event){
+        savegamevar sgv=new savegamevar();
+        try {
+            sgv = sgv.derialise();
+        }
+        catch(Exception e){
+
+        }
+        sgv.setLocation(3);
+        try{
+            sgv.serialise();
+            switchToScene1(event);
+        }
+        catch(Exception e){
+
+        }
+    }
+    public void saveprogress(ActionEvent event){
+        Hero current=new Hero();
+        try {
+            current = current.derialise();
+        }
+        catch(Exception e){
+
+        }
+        savegamevar sgv=new savegamevar();
+        try {
+            sgv = sgv.derialise();
+        }
+        catch (Exception e){
+
+        }
+
+        if(sgv.getChoice()==1){
+            try {
+                current.serialise1();
+            }
+            catch (Exception e){
+
+            }
+            sgv.setChoice(2);
+            try{
+                sgv.serialise();
+
+            }
+            catch(Exception e){
+
+            }
+        }
+        else if(sgv.getChoice()==2){
+            try{
+                current.serialise2();
+            }
+            catch (Exception e){
+
+            }
+            sgv.setChoice(3);
+            try{
+                sgv.serialise();
+            }
+            catch(Exception e){
+
+            }
+        }
+        else if(sgv.getChoice()==3){
+            try {
+                current.serialise3();
+            }
+            catch (Exception e){
+
+            }
+            sgv.setChoice(1);
+            try{
+                sgv.serialise();
+            }
+            catch(Exception e){
+
+            }
+        }
+
+
+
+    }
     @FXML
     public void handleCloseButtonAction(ActionEvent event) {
         this.stage = (Stage)this.closeButton.getScene().getWindow();

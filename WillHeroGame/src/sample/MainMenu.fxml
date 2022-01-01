@@ -11,7 +11,7 @@
    <children>
       <VBox layoutX="648.0" layoutY="170.0" prefHeight="295.0" prefWidth="183.0" spacing="10.0">
          <children>
-            <Button fx:id="start" mnemonicParsing="false" onAction="#switchToScene1" prefHeight="50.0" prefWidth="182.0" style="-fx-background-color: #6bedd7;" styleClass="resu" stylesheets="@background.css" text="Start Game">
+            <Button fx:id="start" mnemonicParsing="false" onAction="#loadnewgame" prefHeight="50.0" prefWidth="182.0" style="-fx-background-color: #6bedd7;" styleClass="resu" stylesheets="@background.css" text="Start Game">
                <font>
                   <Font size="23.0" />
                </font>

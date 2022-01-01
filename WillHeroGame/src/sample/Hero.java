@@ -94,6 +94,87 @@ public class Hero extends Mortals{
        return r;
 
     }
+    public void serialise1() throws IOException {
+        FileOutputStream fout=new FileOutputStream("savegame1.txt");
+        ObjectOutputStream Out=new ObjectOutputStream(fout);
+        Out.writeObject(this);
+        Out.close();
+        fout.close();
+    }
+    public Hero derialise1() throws IOException,ClassNotFoundException, FileNotFoundException {
+        Hero r;
+        try {
+
+            FileInputStream fileInputStream = new FileInputStream("savegame1.txt");
+            ObjectInputStream in = new ObjectInputStream(fileInputStream);
+            r = (Hero) in.readObject();
+
+            in.close();
+            fileInputStream.close();
+        }
+        catch (FileNotFoundException e){
+            return new Hero();
+        }
+        catch(NullPointerException e){
+            return new Hero();
+        }
+        return r;
+
+    }
+    public void serialise2() throws IOException {
+        FileOutputStream fout=new FileOutputStream("savegame2.txt");
+        ObjectOutputStream Out=new ObjectOutputStream(fout);
+        Out.writeObject(this);
+        Out.close();
+        fout.close();
+    }
+    public Hero derialise2() throws IOException,ClassNotFoundException, FileNotFoundException {
+        Hero r;
+        try {
+
+            FileInputStream fileInputStream = new FileInputStream("savegame2.txt");
+            ObjectInputStream in = new ObjectInputStream(fileInputStream);
+            r = (Hero) in.readObject();
+
+            in.close();
+            fileInputStream.close();
+        }
+        catch (FileNotFoundException e){
+            return new Hero();
+        }
+        catch(NullPointerException e){
+            return new Hero();
+        }
+        return r;
+
+    }
+    public void serialise3() throws IOException {
+        FileOutputStream fout=new FileOutputStream("savegame3.txt");
+        ObjectOutputStream Out=new ObjectOutputStream(fout);
+        Out.writeObject(this);
+        Out.close();
+        fout.close();
+    }
+    public Hero derialise3() throws IOException,ClassNotFoundException, FileNotFoundException {
+        Hero r;
+        try {
+
+            FileInputStream fileInputStream = new FileInputStream("savegame3.txt");
+            ObjectInputStream in = new ObjectInputStream(fileInputStream);
+            r = (Hero) in.readObject();
+
+            in.close();
+            fileInputStream.close();
+        }
+        catch (FileNotFoundException e){
+            return new Hero();
+        }
+        catch(NullPointerException e){
+            return new Hero();
+        }
+        return r;
+
+    }
     public void MoveAhead(){
 
     }

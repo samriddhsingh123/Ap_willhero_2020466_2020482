@@ -2360,7 +2360,7 @@ public class Controller implements Initializable {
             }
             Controller2 cd = new Controller2();
             try {
-                cd.switchToScene1(actionEvent);
+                cd.loadnewgame(actionEvent);
             } catch (Exception e) {
 
             }
@@ -3178,15 +3178,64 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        Hero k=new Hero();
+        savegamevar sgv=new savegamevar();
         try {
-            will = k.derialise();
+            sgv = sgv.derialise();
         }
-        catch(Exception e) {
+        catch(Exception e){
+
+        }
+        Hero k=new Hero();
+        if(sgv.getLocation()==0){
+            try {
+                will = k.derialise();
+            } catch (Exception e) {
+
+            }
+        }
+        if(sgv.getLocation()==1) {
+            try {
+                will = k.derialise1();
+            } catch (Exception e) {
+
+            }
+        }
+        if(sgv.getLocation()==2){
+            try {
+                will = k.derialise2();
+            } catch (Exception e) {
+
+            }
+        }
+        if(sgv.getLocation()==3){
+            try {
+                will = k.derialise3();
+            } catch (Exception e) {
+
+            }
+        }
+        if(sgv.getCounter()==1){
+            sgv.setCounter(0);
+            sgv.setLocation(0);
+            try {
+
+                sgv.serialise();
+            } catch (Exception e) {
+
+            }
+        }
+        else if(sgv.getCounter()==0) {
+            sgv.setCounter(1);
+            try {
+
+                sgv.serialise();
+            } catch (Exception e) {
+
+            }
 
         }
         hero.setOpacity(1);
+
         double x=will.getPosition().getX_position();
         stepcounter.setTranslateX(x);
         coincounter.setTranslateX(x);
@@ -3277,10 +3326,11 @@ public class Controller implements Initializable {
         TranslateTransition mc=new TranslateTransition();
         mc.setNode(s);
         mc.setDuration(Duration.millis(300));
-        mc.setByX(300);
+        mc.setByX(299.5);
         mc.play();
     }
     public void moveright(KeyEvent keyEvent){
+        if(keyEvent.getText().equals("d")){
             moverevive(revivepane2);
             moverevive(background);
             // moverevive(saveme);
@@ -3354,7 +3404,7 @@ public class Controller implements Initializable {
                 SequentialTransition sq = new SequentialTransition(ax);
             }
 
-    }
+    }}
     public void moveright(){
 //        pauseButton.setX(pauseButton.getX()+96);
         // pauseButton.setLayoutX(pauseButton.getLayoutX()+96);
