@@ -284,6 +284,14 @@ public class Controller2 {
         stage.setScene(scene);
         stage.show();
     }
+    public void howToPlay(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/sample/HowToPlay.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage.setTitle("Will Hero");
+        scene = new Scene(root,1100,800);
+        stage.setScene(scene);
+        stage.show();
+    }
 
 
 }

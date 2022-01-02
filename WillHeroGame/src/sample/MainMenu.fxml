@@ -54,7 +54,7 @@
                   </RadialGradient>
                </textFill>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="184.0" style="-fx-background-color: #6bedd7;" styleClass="resu" stylesheets="@background.css" text="HOW TO PLAY">
+            <Button mnemonicParsing="false" onAction="#howToPlay" prefHeight="50.0" prefWidth="184.0" style="-fx-background-color: #6bedd7;" styleClass="resu" stylesheets="@background.css" text="HOW TO PLAY">
                <textFill>
                   <RadialGradient centerX="0.5444444444444444" centerY="0.12857142857142856" radius="0.5">
                      <stops>
