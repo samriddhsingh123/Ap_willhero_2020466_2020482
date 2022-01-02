@@ -280,6 +280,8 @@ public class Controller2 {
         Parent root = FXMLLoader.load(getClass().getResource("/sample/SavedGameWindow.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setTitle("Will Hero");
+
+        //hj
         scene = new Scene(root,1100,800);
         stage.setScene(scene);
         stage.show();
