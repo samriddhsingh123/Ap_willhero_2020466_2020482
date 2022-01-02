@@ -9,7 +9,7 @@
 
 <AnchorPane prefHeight="750.0" prefWidth="856.0" styleClass="Creditbg" stylesheets="@background.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller2">
    <children>
-      <Label layoutX="181.0" layoutY="165.0" prefHeight="507.0" prefWidth="707.0" style="-fx-background-color: #69beea;" text="&quot;This game was given as project in IIITD which was made by: Samriddh Singh(2020466) and Varun Parashar(2020482)&quot;" wrapText="true">
+      <Label layoutX="181.0" layoutY="165.0" prefHeight="507.0" prefWidth="707.0" style="-fx-background-color: #d1aafa;" text="&quot;This game was given as project in IIITD which was made by: Samriddh Singh(2020466) and Varun Parashar(2020482)&quot;" wrapText="true">
          <font>
             <Font name="French Script MT" size="45.0" />
          </font>

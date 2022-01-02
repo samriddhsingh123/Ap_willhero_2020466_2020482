@@ -11,9 +11,9 @@
 
 <AnchorPane fx:id="rootAnchor1" prefHeight="800.0" prefWidth="1100.0" style="-fx-background-color: #23dffc;" styleClass="Creditbg" stylesheets="@background.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller2">
    <children>
-      <Pane layoutX="305.0" layoutY="215.0" prefHeight="371.0" prefWidth="553.0" style="-fx-background-color: #48ddff;">
+      <Pane layoutX="305.0" layoutY="215.0" prefHeight="371.0" prefWidth="553.0" style="-fx-background-color: #d1aafa;">
          <children>
-            <Button fx:id="closeButton" alignment="CENTER" layoutX="102.0" layoutY="152.0" mnemonicParsing="false" onAction="#handleCloseButtonAction" prefHeight="50.0" prefWidth="83.0" style="-fx-background-color: #b1b1b1;" stylesheets="@background.css" text="YES" underline="true">
+            <Button fx:id="closeButton" alignment="CENTER" layoutX="115.0" layoutY="152.0" mnemonicParsing="false" onAction="#handleCloseButtonAction" prefHeight="50.0" prefWidth="83.0" style="-fx-background-color: #b1b1b1;" stylesheets="@background.css" text="YES" underline="true">
                <font>
                   <Font size="23.0" />
                </font>
@@ -22,7 +22,7 @@
                   <String fx:value="closebutton" />
                </styleClass>
             </Button>
-            <Button fx:id="no" alignment="CENTER" layoutX="332.0" layoutY="152.0" mnemonicParsing="false" onAction="#exitToMainMenu" prefHeight="50.0" prefWidth="83.0" style="-fx-background-color: #b1b1b1;" stylesheets="@background.css" text="NO" textFill="#35052c" underline="true">
+            <Button fx:id="no" alignment="CENTER" layoutX="355.0" layoutY="152.0" mnemonicParsing="false" onAction="#exitToMainMenu" prefHeight="50.0" prefWidth="83.0" style="-fx-background-color: #b1b1b1;" stylesheets="@background.css" text="NO" textFill="#35052c" underline="true">
                <font>
                   <Font size="23.0" />
                </font>
