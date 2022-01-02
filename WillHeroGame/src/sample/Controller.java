@@ -850,6 +850,7 @@ public class Controller implements Initializable{
                 openchest7.setOpacity(1);
                 chest7.setOpacity(0);
             }
+            //
             if(chest.getId().equals("chest8")){
                 if(check8==0){
                     check8=1;
