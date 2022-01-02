@@ -4,6 +4,7 @@ import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
@@ -19,6 +20,7 @@ public class Hero extends Mortals{
     private boolean isalive=true;
     private int score=0;
     private int timeelapsed=0;
+    private ImageView heroimg;
     Hero(){
         coin=new Coin();
         coin.setCoinVal(0);
@@ -61,18 +63,26 @@ public class Hero extends Mortals{
         trans.play();
     }
     @Override
-    public void collide(Mortals m) {
-
+    public boolean collide(ImageView r) {
+        if(heroimg.getBoundsInParent().intersects(r.getBoundsInParent())){
+            return true;
+        }
+        return false;
     }
 
     @Override
     public void jump() {
-
+        TranslateTransition trans = new TranslateTransition();
+        Node image = hero;
+        trans.setNode(image);
+        trans.setDuration(Duration.millis(300));
+        trans.setByY(300);
+        trans.play();
     }
 
     @Override
     public void kill(Mortals m) {
-
+        //not required as hero can kill by collision and weapon
     }
     @Override
     public void die() {
@@ -190,10 +200,22 @@ public class Hero extends Mortals{
 
     }
     public void MoveAhead(){
+        TranslateTransition trans = new TranslateTransition();
+        Node image = hero;
+        trans.setNode(image);
+        trans.setDuration(Duration.millis(300));
+        trans.setByX(300);
+        trans.play();
+    }
+    public void UseWeapon(int i){
+        w.getIthOfWeaponlist(i).Throw();
 
     }
-    public void UseWeapon(){
-
+    public void setImage(ImageView img){
+        heroimg=img;
+    }
+    public ImageView getImage(){
+        return heroimg;
     }
     public Weapon getWeapon(){
         return w;

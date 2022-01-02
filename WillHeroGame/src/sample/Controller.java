@@ -433,17 +433,8 @@ public class Controller implements Initializable{
     @FXML
     private AnchorPane wonpane;
     @FXML
-    private Label youwon;
-    @FXML
     private Label toofast;
-    @FXML
-    private Label highscore;
-    @FXML
-    private Label yourscore;
-    @FXML
-    private Label yourscoreint;
-    @FXML
-    private Label highscoreint;
+
     @FXML
     private Button mainmenubutton;
     @FXML
@@ -464,6 +455,8 @@ public class Controller implements Initializable{
     private ImageView openchest8;
     @FXML
     private Label timer;
+    @FXML
+    private ImageView bigcoin;
 
     private int time=120;
     private int timeelapsed=0;
@@ -483,13 +476,7 @@ public class Controller implements Initializable{
     private Scene scene;
     private Parent root;
     private Camera camera=new PerspectiveCamera();
-    //    public void switchToScene1(ActionEvent event) throws IOException {
-//        root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
-//        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//        scene = new Scene(root);
-//        stage.setScene(scene);
-//        stage.show();
-//    }
+
     public void starttimer(){
         t=new Thread(new Runnable() {
             @Override
@@ -620,32 +607,7 @@ public class Controller implements Initializable{
                                 trans.setByX(200);
                                 trans.setOnFinished(e -> finished1(boss));
                                 trans.play();
-//                                TranslateTransition trans2 = new TranslateTransition();
-//                                trans2.setNode(camera);
-//                                trans2.setByX(-10);
-//
-//                                TranslateTransition trans1 = new TranslateTransition();
-//                                trans1.setNode(hero);
-//                                trans1.setByX(-10);
-//                                trans1.play();
-//                                trans2.play();
-//                                TranslateTransition ax = new TranslateTransition();
-//                                ax.setNode(axe);
-//                                ax.setByX(-10);
-//                                ax.play();
-//                                trans.play();
-//                                TranslateTransition k1 = new TranslateTransition();
-//                                k1.setNode(knife1);
-//                                k1.setByX(-10);
-//                                k1.play();
-//                                TranslateTransition k2 = new TranslateTransition();
-//                                k2.setNode(knife2);
-//                                k2.setByX(-10);
-//                                k2.play();
-//                                TranslateTransition k3 = new TranslateTransition();
-//                                k3.setNode(knife3);
-//                                k3.setByY(-10);
-//                                k3.play();
+
                             }
 
                         }
@@ -678,7 +640,7 @@ public class Controller implements Initializable{
                                 ax.play();
                                 trans.play();
 
-                                //axe.setTranslateY(hero.getBoundsInParent().getCenterY());
+
                             }
                         }
                     }
@@ -704,9 +666,7 @@ public class Controller implements Initializable{
                     Node image = boss;
                     trans.setNode(image);
                     trans.setDuration(Duration.millis(300));
-                    //trans.setCycleCount(2);
                     trans.setByY(-150);
-                    //trans.setAutoReverse(true);
                     trans.setOnFinished(e -> finished1(boss));
                     trans.play();
                 }
@@ -716,9 +676,9 @@ public class Controller implements Initializable{
                         Node image = boss;
                         trans.setNode(image);
                         trans.setDuration(Duration.millis(500));
-                        //trans.setCycleCount(2);
+
                         trans.setByX(-50);
-                        //trans.setAutoReverse(true);
+
                         trans.setOnFinished(e -> finished1(boss));
                         trans.play();
 
@@ -907,8 +867,7 @@ public class Controller implements Initializable{
                     orc.setOpacity(0);
                     changecoincounter(1);
                 }
-//            orc.setTranslateX(1000);
-//            orc.setTranslateY(1000);
+
             }
         }
     }
@@ -2425,6 +2384,13 @@ public class Controller implements Initializable{
            }
 
        }
+        if(hero.getBoundsInParent().intersects(bigcoin.getBoundsInParent())){
+            if(bigcoin.getOpacity()==1) {
+                bigcoin.setOpacity(0);
+                changecoincounter(5);
+            }
+
+        }
         if(hero.getBoundsInParent().intersects(coin2.getBoundsInParent())){
             if(coin2.getOpacity()==1) {
                 coin2.setOpacity(0);
@@ -2457,13 +2423,6 @@ public class Controller implements Initializable{
         }
     }
     public void timer(int seconds){
-//            int r=(int)System.currentTimeMillis()/1000;
-//            int diff=0;
-//            while(diff!=seconds){
-//                diff=(int)System.currentTimeMillis()/1000-r;
-//                System.out.println(diff);
-//            }
-//            System.out.println(seconds);
 
 
     }
@@ -2487,111 +2446,14 @@ public class Controller implements Initializable{
         }
     }
 
-//            herodead=0;
 
-//            changecoincounter(-10);
-//           // hero.setTranslateX(will.getPosition().getX_position());
-//           // camera.setTranslateX(will.getPosition().getX_position());
-//            hero.setOpacity(1);
-//            hero.setTranslateY(-300);
-//            movecoin1.setOpacity(0);
-//            reviveorc.setOpacity(0);
-//            revivenobutton.setOpacity(0);
-//            reviveyesbutton.setOpacity(0);
-//            revivepane2.setOpacity(0);
-//            finished();
-//            hero.setOnKeyPressed(new EventHandler<javafx.scene.input.KeyEvent>() {
-//                @Override
-//                public void handle(KeyEvent keyEvent) {
-//                    if(keyEvent.getText().equals("d")) {
-////            moverevive(movecoin1);
-////            moverevive(reviveorc);
-////            moverevive(reviveyesbutton);
-////            moverevive(revivenobutton);
-//                        moverevive(revivepane2);
-//                        // moverevive(saveme);
-////            movecoin1.setTranslateX(movecoin1.getTranslateX()+300);
-////            reviveorc.setTranslateX(reviveorc.getTranslateX()+300);
-////            reviveyesbutton.setTranslateX(reviveyesbutton.getTranslateX()+300);
-////            revivenobutton.setTranslateX(revivenobutton.getTranslateX()+300);
-////            revivepane2.setTranslateX(revivepane2.getTranslateX()+300);
-////            saveme.setTranslateX(300);
-//                        incrementstepcounter();
-//                        TranslateTransition mc=new TranslateTransition();
-//                        mc.setNode(movecoin);
-//                        mc.setDuration(Duration.millis(300));
-//                        mc.setByX(300);
-//                        mc.play();
-//
-//                        TranslateTransition cc=new TranslateTransition();
-//                        cc.setNode(coincounter);
-//                        cc.setDuration(Duration.millis(300));
-//                        cc.setByX(300);
-//                        cc.play();
-//                        TranslateTransition sc=new TranslateTransition();
-//                        sc.setNode(stepcounter);
-//                        sc.setDuration(Duration.millis(300));
-//                        sc.setByX(300);
-//                        sc.play();
-//                        TranslateTransition trans=new TranslateTransition();
-//                        Node image=hero;
-//                        trans.setNode(image);
-//                        trans.setDuration(Duration.millis(300));
-//                        trans.setByX(300);
-//                        trans.play();
-//                        // h.moveright();
-//                        RotateTransition rax=new RotateTransition();
-//                        rax.setNode(axe);
-//                        rax.setDuration(Duration.millis(300));
-//                        rax.setCycleCount(2);
-//                        rax.setByAngle(360);
-//                        rax.play();
-////            if(axefound==1) {
-////                axe.setOpacity(1);
-////            }
-//                        TranslateTransition k1=new TranslateTransition();
-//                        k1.setNode(knife1);
-//                        k1.setDuration(Duration.millis(300));
-//                        k1.setByX(450);
-//                        k1.setOnFinished(e->kfinish(knife1));
-//                        k1.play();
-//                        TranslateTransition k2=new TranslateTransition();
-//                        k2.setNode(knife2);
-//                        k2.setDuration(Duration.millis(100));
-//                        k2.setByX(100);
-//                        k2.setOnFinished(e->knife2finished());
-//                        k2.play();
-//                        TranslateTransition k3=new TranslateTransition();
-//                        k3.setNode(knife3);
-//                        k3.setDuration(Duration.millis(200));
-//                        k3.setByX(200);
-//                        k3.setOnFinished(e->knife3finished());
-//                        k3.play();
-//
-//                        TranslateTransition ax=new TranslateTransition();
-//                        ax.setNode(axe);
-//                        ax.setDuration(Duration.millis(300));
-//                        ax.setByX(450);
-//                        ax.setOnFinished(e -> axreturn());
-//                        ax.play();
-//
-//                        SequentialTransition sq=new SequentialTransition(ax);
 
-//                    }
-//
-//                }
-//
-//            });
-//
-//
-//        }
-//    }
+
     public void checkherodead(){
         if(hero.getBoundsInParent().getCenterY()>900){
             if(herodead==0) {
                 herodead = 1;
-               //revivebutton.fire();
-                //hero.setOpacity(0);
+
                 showrevivescene();
             }
         }
@@ -2603,24 +2465,15 @@ public class Controller implements Initializable{
                     orc.setOpacity(0);
                     changecoincounter(1);
                 }
-//                orc.setTranslateX(1000);
-//                orc.setTranslateY(1000);
+//
             }
         }
     }
     public void ReviveUsingCoins(ActionEvent event) throws IOException {
-//        Parent root = FXMLLoader.load(getClass().getResource("/sample/ReviveScene2.fxml"));
-//        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-//        scene = new Scene(root,1100,800);
-//        stage.setScene(scene);
-//        stage.show();
+
     }
     public void Revive(Stage stage) throws IOException {
-//        Parent root = FXMLLoader.load(getClass().getResource("ReviveScene2.fxml"));
-//        scene = new Scene(root,1100,800);
-//        stage.setTitle("Will Hero");
-//        stage.setScene(scene);
-//        stage.show();
+
     }
     public void switchToGame(ActionEvent event) throws IOException {
 
@@ -2669,9 +2522,7 @@ public class Controller implements Initializable{
     }
 
     public void movecamera(){
-//        if(hero.getOpacity()==0){
-//            return;
-//        }
+
         TranslateTransition trans=new TranslateTransition();
         trans.setNode(camera);
         trans.setDuration(Duration.millis(300));
@@ -2741,15 +2592,7 @@ public class Controller implements Initializable{
                         trans.setByX(500);
                         trans.setOnFinished(e -> finished1(orc));
                         trans.play();
-//                    TranslateTransition trans2 = new TranslateTransition();
-//                    trans2.setNode(camera);
-//                    trans2.setByX(-10);
-//
-//                    TranslateTransition trans1 = new TranslateTransition();
-//                    trans1.setNode(hero);
-//                    trans1.setByX(-10);
-//                    trans1.play();
-//                    trans2.play();
+
                     }
 
                 }
@@ -2782,7 +2625,7 @@ public class Controller implements Initializable{
                         ax.play();
                         trans.play();
 
-                        //axe.setTranslateY(hero.getBoundsInParent().getCenterY());
+
                     }
                 }
             }
@@ -2805,11 +2648,7 @@ public class Controller implements Initializable{
         revivepane2.setOpacity(1);
         saveme.setOpacity(1);
         double r=will.getPosition().getX_position();
-//        movecoin1.setTranslateX(r);
-//        reviveorc.setTranslateX(r);
-//        reviveyesbutton.setTranslateX(r);
-//        revivenobutton.setTranslateX(r);
-//        revivepane2.setTranslateX(r+350);
+
     }
     public void orcCollisionwithplatform(ImageView orc,ImageView platform){
         double orctop=orc.getBoundsInParent().getMinY();
@@ -2829,9 +2668,9 @@ public class Controller implements Initializable{
                     Node image = orc;
                     trans.setNode(image);
                     trans.setDuration(Duration.millis(300));
-                    //trans.setCycleCount(2);
+
                     trans.setByY(-150);
-                    //trans.setAutoReverse(true);
+
                     trans.setOnFinished(e -> finished1(orc));
                     trans.play();
                 }
@@ -2841,9 +2680,9 @@ public class Controller implements Initializable{
                             Node image = orc;
                             trans.setNode(image);
                             trans.setDuration(Duration.millis(500));
-                            //trans.setCycleCount(2);
+
                             trans.setByX(-50);
-                            //trans.setAutoReverse(true);
+
                             trans.setOnFinished(e -> finished1(orc));
                             trans.play();
 
@@ -2864,9 +2703,9 @@ public class Controller implements Initializable{
         Node image1=orc;
         trans1.setNode(image1);
         trans1.setDuration(Duration.millis((800-orc.getY())*3));
-        // trans.setCycleCount(2);
+
         trans1.setByY(800-orc.getY());
-        //trans.setAutoReverse(true);
+
         trans1.play();
     }
     public void checkCollision(ImageView platform){
@@ -2884,7 +2723,7 @@ public class Controller implements Initializable{
 
             if ((int) herobottom >= (int) ptop) {
                 if ((int) ptop + 15 >= (int) herobottom) {
-//                    axe.setY(hero.getBoundsInParent().getCenterY());
+
                     if(herodead==0) {
                         if((int)hero.getTranslateX()!=0){
                         int num=Integer.parseInt(coincounter.getText());
@@ -2930,9 +2769,7 @@ public class Controller implements Initializable{
                     Node image = hero;
                     trans.setNode(image);
                     trans.setDuration(Duration.millis(300));
-                    //trans.setCycleCount(2);
                     trans.setByY(-100);
-                    //trans.setAutoReverse(true);
                     trans.setOnFinished(e -> finished());
                     trans.play();
                 }
@@ -3290,21 +3127,14 @@ public class Controller implements Initializable{
         Node image1=hero;
         trans1.setNode(image1);
         trans1.setDuration(Duration.millis((900-hero.getY())*3.5));
-        // trans.setCycleCount(2);
         trans1.setByY(900-hero.getY());
-        //trans.setAutoReverse(true);
         trans1.play();
     }
-//    Timer timer=new Timer(1000,new ActionListener(){
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//
-//        }
-//    });
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-       // timer(10);
+
 
         savegamevar sgv=new savegamevar();
         try {
@@ -3450,25 +3280,20 @@ public class Controller implements Initializable{
         openchest7.setOpacity(0);
         openchest8.setOpacity(0);
         wonpane.setOpacity(0);
-        youwon.setOpacity(0);
         toofast.setOpacity(0);
-        highscore.setOpacity(0);
-        yourscore.setOpacity(0);
-        yourscoreint.setOpacity(0);
-        highscoreint.setOpacity(0);
-        mainmenubutton.setOpacity(0);
+        rotatebigcoin();
+//
+    }
+    public void rotatebigcoin(){
+        RotateTransition rt=new RotateTransition();
+        rt.setNode(bigcoin);
+        rt.setByAngle(360);
+        rt.setCycleCount(TranslateTransition.INDEFINITE);
+        rt.setDuration(Duration.millis(4000));
+        rt.play();
     }
     public void checkherowon(){
         if(hero.getBoundsInParent().getCenterX()>41500){
-            if(timeelapsed<=120) {
-                will.setScore(2*(8 * will.getCoin().getCoinVal() + will.getstep()));
-                toofast.setOpacity(1);
-                yourscoreint.setText(Integer.toString(will.getScore()));
-            }
-            else{
-                will.setScore(2*(8 * will.getCoin().getCoinVal() + will.getstep()));
-                yourscoreint.setText(Integer.toString(will.getScore()));
-            }
             highscore h=new highscore();
             try {
                 h = h.derialise();
@@ -3476,6 +3301,32 @@ public class Controller implements Initializable{
             catch(Exception e){
 
             }
+            String youwon="                                 YOU WON!!!!!\n\n";
+
+            String fast="YOU WERE TOO FAST, YOUR SCORE GETS DOUBLED\n\n";
+            String yourscore="YOUR SCORE:   ";
+            String yourscoreint=Integer.toString(will.getScore());
+            String highscore="HIGH SCORE:   ";
+            String highscoreint=Integer.toString(h.getHighscore());
+            String fullscorelabel=yourscore+yourscoreint+"       "+highscore+highscoreint+"\n";
+            String total=youwon+fast;
+            if(timeelapsed<=120) {
+                will.setScore(2*(8 * will.getCoin().getCoinVal() + will.getstep()));
+
+                toofast.setText(youwon+fast+fullscorelabel);
+
+                toofast.setOpacity(1);
+                wonpane.setOpacity(1);
+
+            }
+            else{
+                will.setScore(2*(8 * will.getCoin().getCoinVal() + will.getstep()));
+                toofast.setText(youwon+fullscorelabel);
+                toofast.setOpacity(1);
+                wonpane.setOpacity(1);
+
+            }
+
             if(will.getScore()>h.getHighscore()){
                 h.setHighscore(will.getScore());
             }
@@ -3485,15 +3336,9 @@ public class Controller implements Initializable{
             catch(Exception e){
 
             }
-            highscoreint.setText(Integer.toString(h.getHighscore()));
-            wonpane.setOpacity(1);
-            youwon.setOpacity(1);
 
-            highscore.setOpacity(1);
-            yourscore.setOpacity(1);
-            yourscoreint.setOpacity(1);
-            highscoreint.setOpacity(1);
-            mainmenubutton.setOpacity(1);
+            wonpane.setOpacity(1);
+
         }
     }
     public void orcjump(ImageView orc){
@@ -3519,13 +3364,7 @@ public class Controller implements Initializable{
             moverevive(background);
             moverevive(saveme);
             moverevive(timer);
-            // moverevive(saveme);
-//            movecoin1.setTranslateX(movecoin1.getTranslateX()+300);
-//            reviveorc.setTranslateX(reviveorc.getTranslateX()+300);
-//            reviveyesbutton.setTranslateX(reviveyesbutton.getTranslateX()+300);
-//            revivenobutton.setTranslateX(revivenobutton.getTranslateX()+300);
-//            revivepane2.setTranslateX(revivepane2.getTranslateX()+300);
-//            saveme.setTranslateX(300);
+
 
             TranslateTransition mc=new TranslateTransition();
             mc.setNode(movecoin);
@@ -3551,16 +3390,14 @@ public class Controller implements Initializable{
                 trans.setDuration(Duration.millis(300));
                 trans.setByX(300);
                 trans.play();
-                // h.moveright();
+
                 RotateTransition rax = new RotateTransition();
                 rax.setNode(axe);
                 rax.setDuration(Duration.millis(300));
                 rax.setCycleCount(2);
                 rax.setByAngle(360);
                 rax.play();
-//            if(axefound==1) {
-//                axe.setOpacity(1);
-//            }
+//
                 TranslateTransition k1 = new TranslateTransition();
                 k1.setNode(knife1);
                 k1.setDuration(Duration.millis(300));
@@ -3592,23 +3429,7 @@ public class Controller implements Initializable{
 
     }}
     public void moveright(){
-//        pauseButton.setX(pauseButton.getX()+96);
-        // pauseButton.setLayoutX(pauseButton.getLayoutX()+96);
-        // pauseButton.setTranslateX(pauseButton.getTranslateX()+96);
-
-
-//            moverevive(movecoin1);
-//            moverevive(reviveorc);
-//            moverevive(reviveyesbutton);
-//            moverevive(revivenobutton);
             moverevive(revivepane2);
-            // moverevive(saveme);
-//            movecoin1.setTranslateX(movecoin1.getTranslateX()+300);
-//            reviveorc.setTranslateX(reviveorc.getTranslateX()+300);
-//            reviveyesbutton.setTranslateX(reviveyesbutton.getTranslateX()+300);
-//            revivenobutton.setTranslateX(revivenobutton.getTranslateX()+300);
-//            revivepane2.setTranslateX(revivepane2.getTranslateX()+300);
-//            saveme.setTranslateX(300);
 
             TranslateTransition mc=new TranslateTransition();
             mc.setNode(movecoin);
@@ -3634,16 +3455,14 @@ public class Controller implements Initializable{
                 trans.setDuration(Duration.millis(300));
                 trans.setByX(300);
                 trans.play();
-                // h.moveright();
+
                 RotateTransition rax = new RotateTransition();
                 rax.setNode(axe);
                 rax.setDuration(Duration.millis(300));
                 rax.setCycleCount(2);
                 rax.setByAngle(360);
                 rax.play();
-//            if(axefound==1) {
-//                axe.setOpacity(1);
-//            }
+
                 TranslateTransition k1 = new TranslateTransition();
                 k1.setNode(knife1);
                 k1.setDuration(Duration.millis(300));
@@ -3695,27 +3514,12 @@ public class Controller implements Initializable{
         k1.play();
     }
     public void axreturn(){
-//        double axy=axe.getBoundsInParent().getCenterY();
-//        double heroy=hero.getBoundsInParent().getCenterY();
+
         double r=hero.getBoundsInParent().getCenterX();
-       // axe.setOpacity(0);
-//        double t=axe.getBoundsInParent().getCenterX();
-////        double k=r-t;
-////        TranslateTransition ax=new TranslateTransition();
-////        ax.setNode(axe);
-////        if(k<0){
-////            k=k*(-1);
-////        }
-////        ax.setDuration(Duration.millis(k));
-////        ax.setByX(r-t);
-////        ax.play();
+
         axe.setTranslateX(r-255);
 
-//        if(axe.getBoundsInParent().getCenterY()<=hero.getBoundsInParent().getCenterY()+60)
-//        {
-//            axe.setY(255);
-//        }
-       // axe.setTranslateY(hero.getBoundsInParent().getCenterY()-255);
+
     }
     public void moveisland(int r,ImageView img){
         TranslateTransition t1=new TranslateTransition();
@@ -3733,12 +3537,7 @@ public class Controller implements Initializable{
 
     public void checkheroposition(Scene node){
 
-//        if(hero.getBoundsInLocal().getCenterX()<b){
-//            TranslateTransition t1=new TranslateTransition();
-//            t1.setNode(hero);
-//            t1.setByX(b-hero.getBoundsInLocal().getCenterX()+50);
-//            t1.play();
-//        }
+
     }
 
 

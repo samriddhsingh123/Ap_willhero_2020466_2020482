@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.scene.image.ImageView;
+
 import java.io.Serializable;
 
 public abstract class Mortals implements Serializable {
@@ -18,7 +20,7 @@ public abstract class Mortals implements Serializable {
         health=h;
     }
     public void reduceHealth(int red){
-//        health =health-red;
+        health.setValue(health.getValue()-red);
     }
     public Dimension getDimension(){
         return dim;
@@ -32,7 +34,7 @@ public abstract class Mortals implements Serializable {
     public void setPosition(Position p){
         pos=p;
     }
-    public abstract void collide(Mortals m);
+    public abstract boolean collide(ImageView r);
 
     public abstract void jump();
     public abstract void kill(Mortals m);

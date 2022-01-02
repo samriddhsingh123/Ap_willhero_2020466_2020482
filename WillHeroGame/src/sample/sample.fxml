@@ -1111,39 +1111,12 @@
       </DialogPane>
       <AnchorPane fx:id="wonpane" layoutX="41731.0" layoutY="132.0" prefHeight="583.0" prefWidth="1096.0" style="-fx-background-color: #66ff66;">
          <children>
-            <Label fx:id="toofast" alignment="CENTER" prefHeight="96.0" prefWidth="961.0" text="You were too fast!!! Your score gets doubled...." textFill="#ff00e5">
+            <Label fx:id="toofast" alignment="CENTER" layoutX="28.0" layoutY="11.0" prefHeight="375.0" prefWidth="1030.0" text="You were too fast!!! Your score gets doubled...." textFill="#ff00e5">
                <font>
                   <Font size="36.0" />
                </font>
             </Label>
-            <Label fx:id="yourscore" prefHeight="134.0" prefWidth="310.0" text="YOUR SCORE">
-               <font>
-                  <Font size="48.0" />
-               </font>
-               <graphic>
-                  <Label fx:id="youwon" alignment="CENTER" prefHeight="157.0" prefWidth="964.0" text="YOU WON!!" textFill="RED">
-                     <font>
-                        <Font size="64.0" />
-                     </font>
-                  </Label>
-               </graphic>
-            </Label>
-            <Label fx:id="highscore" prefHeight="134.0" prefWidth="310.0" text="HIGH SCORE">
-               <font>
-                  <Font size="48.0" />
-               </font>
-            </Label>
-            <Label fx:id="highscoreint" alignment="CENTER" prefHeight="70.0" prefWidth="128.0" text="000">
-               <font>
-                  <Font size="48.0" />
-               </font>
-            </Label>
-            <Label fx:id="yourscoreint" alignment="CENTER" prefHeight="70.0" prefWidth="128.0" text="000">
-               <font>
-                  <Font size="48.0" />
-               </font>
-            </Label>
-            <Button fx:id="mainmenubutton" mnemonicParsing="false" onAction="#switchToMainMenu" prefHeight="82.0" prefWidth="223.0" style="-fx-background-color: #66ffff#66ffff;" text="MainMenu">
+            <Button fx:id="mainmenubutton" layoutX="421.0" layoutY="442.0" mnemonicParsing="false" onAction="#switchToMainMenu" prefHeight="82.0" prefWidth="223.0" style="-fx-background-color: #66ffff#66ffff;" text="MainMenu">
                <font>
                   <Font size="36.0" />
                </font>
@@ -1195,6 +1168,11 @@
             <Font size="36.0" />
          </font>
       </Label>
+      <ImageView fx:id="bigcoin" fitHeight="80.0" fitWidth="80.0" layoutX="21337.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images2/Coin.png" />
+         </image>
+      </ImageView>
 
    </children>
    <rotationAxis>
