@@ -21,6 +21,7 @@ public class Hero extends Mortals{
     private int score=0;
     private int timeelapsed=0;
     private ImageView heroimg;
+    private int revived=0;
     Hero(){
         coin=new Coin();
         coin.setCoinVal(0);
@@ -29,6 +30,12 @@ public class Hero extends Mortals{
         p.setY_position(-100);
         setPosition(p);
 
+    }
+    public void setRevived(){
+        revived=1;
+    }
+    public int getRevived(){
+        return revived;
     }
     public void settimeelapsed(int r){
         timeelapsed=r;

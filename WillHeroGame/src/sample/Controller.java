@@ -2429,19 +2429,21 @@ public class Controller implements Initializable{
     public void setyesrevive(ActionEvent actionEvent) {
 
         if (Integer.parseInt(coincounter.getText()) >= 10) {
-            changecoincounter(-10);
-            will.getCoin().setCoinVal(Integer.parseInt(coincounter.getText()));
-            try{
-                will.serialise();
-            }
-            catch(Exception e){
+            if (will.getRevived() == 0) {
+                will.setRevived();
+                changecoincounter(-10);
+                will.getCoin().setCoinVal(Integer.parseInt(coincounter.getText()));
+                try {
+                    will.serialise();
+                } catch (Exception e) {
 
-            }
-            Controller2 cd = new Controller2();
-            try {
-                cd.loadnewgame(actionEvent);
-            } catch (Exception e) {
+                }
+                Controller2 cd = new Controller2();
+                try {
+                    cd.loadnewgame(actionEvent);
+                } catch (Exception e) {
 
+                }
             }
         }
     }
